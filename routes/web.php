@@ -6,7 +6,10 @@ Route::post('/sendMsg', 'PublicController@sendMsg')->name('sendMsg');
 
 Route::get('/','Home\IndexController@index')->name('home');
 
-//支付
+Route::get('/test',function (){
+    return view('home.index');
+});
+
 Route::group(['namespace' => 'Home'], function () {
     //微信支付
     Route::get('/wechatPay', 'PayController@wechatPay')->name('wechatPay');

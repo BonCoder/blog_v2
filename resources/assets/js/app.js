@@ -15,8 +15,18 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
+// Vue.component('example-component', require('./components/ExampleComponent.vue'));
+
+import Hello from './components/hello.vue'; // 引入Hello 组件
+import App from './App.vue';
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+Vue.use(ElementUI);
+
+import router from './router/index.js';
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    router,
+    render:h => h(App)
 });
