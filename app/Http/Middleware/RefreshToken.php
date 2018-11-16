@@ -11,6 +11,7 @@ use Tymon\JWTAuth\Http\Middleware\BaseMiddleware;
 
 class RefreshToken extends BaseMiddleware
 {
+
     /**
      * Handle an incoming request.
      *
@@ -21,6 +22,7 @@ class RefreshToken extends BaseMiddleware
      */
     public function handle($request, Closure $next)
     {
+
         // 检查此次请求中是否带有 token，如果没有则抛出异常。
         $this->checkForToken($request);
 
@@ -45,7 +47,8 @@ class RefreshToken extends BaseMiddleware
         }
 
         return $next($request)->withHeaders([
-            'Authorization'=> 'Bearer '.$token,
+            'Authorization' => 'Bearer ' . $token,
         ]);
+
     }
 }

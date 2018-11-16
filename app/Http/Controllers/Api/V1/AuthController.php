@@ -12,7 +12,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Member;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Validator;
+use Illuminate\Support\Facades\Validator;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
@@ -27,6 +28,11 @@ class AuthController extends Controller
         echo "test!!";
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @author   Bob<bob@bobcoder.cc>
+     */
     public function register(Request $request)
     {
 
@@ -49,6 +55,7 @@ class AuthController extends Controller
             'name' => $payload['name'],
             'phone' => $payload['phone'],
             'password' => bcrypt($payload['password']),
+            'uuid' => \Faker\Provider\Uuid::uuid(),
         ]);
 
         if ($result) {
@@ -68,13 +75,13 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
-        $credentials = $request->only('name', 'password');
+        $credentials = $request->only('phone', 'password');
 
         if ($token = $this->guard()->attempt($credentials)) {
             return $this->respondWithToken($token);
         }
 
-        return response()->json('登录失败');
+        return response()->json(['message' => '登陆失败'],401);
     }
 
     /**
@@ -92,10 +99,11 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function logout()
+    public function logout($forceForever = false)
     {
         $this->guard()->logout();
 
+        JWTAuth::setToken(JWTAuth::getToken())->invalidate();
         //return response()->json(['message' => 'Successfully logged out']);
         return response()->json(['message' => '退出成功']);
     }
