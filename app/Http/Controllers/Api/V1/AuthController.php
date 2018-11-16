@@ -32,11 +32,11 @@ class AuthController extends Controller
 
         $rules = [
             'name' => ['required'],
-            'email' => ['required'],
+            'phone' => ['required'],
             'password' => ['required', 'min:6', 'max:16'],
         ];
 
-        $payload = $request->only('name', 'email', 'password');
+        $payload = $request->only('name', 'phone', 'password');
         $validator = Validator::make($payload, $rules);
 
         // 验证格式
@@ -47,7 +47,7 @@ class AuthController extends Controller
         // 创建用户
         $result = Member::create([
             'name' => $payload['name'],
-            'email' => $payload['email'],
+            'phone' => $payload['phone'],
             'password' => bcrypt($payload['password']),
         ]);
 
