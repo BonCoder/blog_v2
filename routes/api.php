@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -13,6 +11,16 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+$api = app('Dingo\Api\Routing\Router');
+$api->version('v1', ['namespace' => 'App\Http\Controllers\Api\V1','prefix' => 'api/v1'], function ($api) {
+    $api->post('register', 'AuthController@register');
+    $api->post('login', 'AuthController@login');
+    $api->post('logout', 'AuthController@logout');
+    $api->get('test', 'AuthController@test');
+
+    //验证token
+    $api->group(['middleware' => 'refresh'],function ($api){
+        $api->post('me', 'AuthController@me');
+        $api->post('refresh', 'AuthController@refresh');
+    });
 });
