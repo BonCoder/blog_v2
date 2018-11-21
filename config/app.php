@@ -183,6 +183,7 @@ return [
         Mews\Captcha\CaptchaServiceProvider::class,
         Yansongda\LaravelPay\PayServiceProvider::class,
         SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
+        Chenhua\MarkdownEditor\MarkdownEditorServiceProvider::class,
 
     ],
 
@@ -237,6 +238,8 @@ return [
         'Pay' => Yansongda\LaravelPay\Facades\Pay::class,
         'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
         'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
+        'MarkdownEditor' => Chenhua\MarkdownEditor\Facades\MarkdownEditor::class,
+
     ],
 
 ];

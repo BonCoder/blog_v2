@@ -75,16 +75,14 @@
     </div>
 </div>
 
-@include('UEditor::head');
 <div class="layui-form-item">
     <label for="" class="layui-form-label">内容</label>
-    <div class="layui-input-block">
-        <script id="container" name="content" type="text/plain">
-            {!! $article->content??old('content') !!}
-        </script>
+    <div id="test-editormd">
+        <textarea name="content" style="display:none;">{!! $article->content??old('content') !!}</textarea>
     </div>
 </div>
 
+@include('markdown::encode',['editors'=>['test-editormd']])
 
 <div class="layui-form-item">
     <div class="layui-input-block">

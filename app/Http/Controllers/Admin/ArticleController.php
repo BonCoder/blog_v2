@@ -23,6 +23,11 @@ class ArticleController extends Controller
         return view('admin.article.index',compact('categorys'));
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @author   Bob<bob@bobcoder.cc>
+     */
     public function data(Request $request)
     {
 
@@ -47,6 +52,7 @@ class ArticleController extends Controller
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
+     * @author   Bob<bob@bobcoder.cc>
      */
     public function create()
     {
@@ -60,8 +66,9 @@ class ArticleController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param ArticleRequest $request
      * @return \Illuminate\Http\Response
+     * @author   Bob<bob@bobcoder.cc>
      */
     public function store(ArticleRequest $request)
     {
@@ -76,8 +83,9 @@ class ArticleController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  int $id
+     * @return void
+     * @author   Bob<bob@bobcoder.cc>
      */
     public function show($id)
     {
@@ -89,6 +97,7 @@ class ArticleController extends Controller
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
+     * @author   Bob<bob@bobcoder.cc>
      */
     public function edit($id)
     {
@@ -110,9 +119,10 @@ class ArticleController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param ArticleRequest $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
+     * @author   Bob<bob@bobcoder.cc>
      */
     public function update(ArticleRequest $request, $id)
     {
@@ -128,8 +138,9 @@ class ArticleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param Request $request
      * @return \Illuminate\Http\Response
+     * @author   Bob<bob@bobcoder.cc>
      */
     public function destroy(Request $request)
     {
