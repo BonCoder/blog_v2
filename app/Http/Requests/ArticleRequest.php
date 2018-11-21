@@ -27,7 +27,6 @@ class ArticleRequest extends FormRequest
             'category_id'   => 'required|numeric',
             'title' => 'required|string|max:200|min:4',
             'keywords'  => 'required|string',
-            'description'   => 'required|string',
             'content'   => 'required|string',
             //'thumb' => 'required|string'
         ];
