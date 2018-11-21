@@ -72,7 +72,7 @@ class ArticleController extends Controller
      */
     public function store(ArticleRequest $request)
     {
-        $data = $request->only(['category_id','title','keywords','description','content','thumb','click']);
+        $data = $request->only(['category_id','title','keywords','content','thumb','click']);
         $article = Article::create($data);
         if ($article && !empty($request->get('tags')) ){
             $article->tags()->sync($request->get('tags'));
@@ -127,7 +127,7 @@ class ArticleController extends Controller
     public function update(ArticleRequest $request, $id)
     {
         $article = Article::with('tags')->findOrFail($id);
-        $data = $request->only(['category_id','title','keywords','description','content','thumb','click']);
+        $data = $request->only(['category_id','title','keywords','content','thumb','click']);
         if ($article->update($data)){
             $article->tags()->sync($request->get('tags',[]));
             return redirect(route('admin.article'))->with(['status'=>'更新成功']);

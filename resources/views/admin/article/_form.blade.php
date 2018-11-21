@@ -45,13 +45,6 @@
 </div>
 
 <div class="layui-form-item">
-    <label for="" class="layui-form-label">描述</label>
-    <div class="layui-input-block">
-        <textarea name="description" placeholder="请输入描述" class="layui-textarea">{{$article->description??old('description')}}</textarea>
-    </div>
-</div>
-
-<div class="layui-form-item">
     <label for="" class="layui-form-label">点击量</label>
     <div class="layui-input-block">
         <input type="number" name="click" value="{{$article->click??mt_rand(100,500)}}" lay-verify="required|numeric"  class="layui-input" >

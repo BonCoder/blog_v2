@@ -85,8 +85,8 @@
                         ,{field: 'keywords', title: '关键词'}
                         ,{field: 'tags', title: '标签',toolbar:'#tags',width:300}
                         ,{field: 'click', title: '点击量'}
-                        ,{field: 'created_at', title: '创建时间'}
-                        ,{field: 'updated_at', title: '更新时间'}
+                        ,{field: 'created_at', title: '创建时间',width:100}
+                        ,{field: 'updated_at', title: '更新时间',width:100}
                         ,{fixed: 'right', width: 220, align:'center', toolbar: '#options'}
                     ]]
                 });
