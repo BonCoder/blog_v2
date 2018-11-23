@@ -23,4 +23,7 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api\V1','prefix' => 'a
         $api->post('me', 'AuthController@me');
         $api->post('refresh', 'AuthController@refresh');
     });
+
+    //获取文章
+    $api->get('article','IndexController@index');
 });
