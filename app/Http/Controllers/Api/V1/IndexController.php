@@ -9,7 +9,9 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Models\Advert;
 use App\Models\Article;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller
@@ -17,11 +19,10 @@ class IndexController extends Controller
     /**
      *
      * @param Request $request
-     * @param Article $article
      * @return \Illuminate\Http\JsonResponse
      * @author   Bob<bob@bobcoder.cc>
      */
-    public function index(Request $request, Article $article)
+    public function index(Request $request)
     {
         $limit = $request->query('limit',5);
         $offset = $request->query('offset', 0);
@@ -43,4 +44,34 @@ class IndexController extends Controller
 
         return response()->json($result,200);
     }
+
+
+    /**
+     * @param Request $request
+     * @param Advert $advert
+     * @return \Illuminate\Http\JsonResponse
+     * @author  Bob<bob@bobcoder.cc>
+     */
+    public function adverts(Request $request, Advert $advert)
+    {
+        $position_id = (int)$request->query('position_id',1);
+
+        $result = $advert->where('position_id',$position_id)->orderBy('sort','desc')->get();
+
+        return response()->json($result,200);
+    }
+
+    /**
+     * @param Tag $tag
+     * @return \Illuminate\Http\JsonResponse
+     * @author  Bob<bob@bobcoder.cc>
+     */
+    public function tag(Tag $tag)
+    {
+        $result = $tag->orderBy('sort','desc')->get();
+
+        return response()->json($result,200);
+    }
+
+
 }

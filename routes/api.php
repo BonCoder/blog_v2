@@ -26,4 +26,8 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api\V1','prefix' => 'a
 
     //获取文章
     $api->get('article','IndexController@index');
+    //获取广告位
+    $api->get('adverts','IndexController@adverts');
+    //获取所有标签
+    $api->get('tag','IndexController@tag');
 });
