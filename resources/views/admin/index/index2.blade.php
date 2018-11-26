@@ -39,7 +39,7 @@
 
                 <div class="layui-card-header">
 
-                    下载
+                    文章
 
                     <span class="layui-badge layui-bg-cyan layuiadmin-badge">月</span>
 
@@ -47,11 +47,11 @@
 
                 <div class="layui-card-body layuiadmin-card-list">
 
-                    <p class="layuiadmin-big-font">33,555</p>
+                    <p class="layuiadmin-big-font">{{ $articles_month }}</p>
 
                     <p>
 
-                        新下载
+                        总共文章
 
                         <span class="layuiadmin-span-color">10% <i class="layui-inline layui-icon layui-icon-face-smile-b"></i></span>
 

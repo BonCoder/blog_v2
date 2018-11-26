@@ -25,7 +25,7 @@ class AuthController extends Controller
      * @return void
      */
     public function test(){
-        echo "test!!";
+            echo 'test';
     }
 
     /**

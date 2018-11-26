@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Article;
 use App\Models\Icon;
 use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class IndexController extends Controller
 {
@@ -32,8 +35,16 @@ class IndexController extends Controller
     {
         return view('admin.index.index1');
     }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @author   Bob<bob@bobcoder.cc>
+     */
     public function index2()
     {
+        $articles_all = Article::query()->count('id');
+        $articles_month = Article::query()->whereMonth('created_at',Carbon::now()->month)->count('id');
+
         return view('admin.index.index2');
     }
 
