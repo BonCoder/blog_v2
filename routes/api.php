@@ -12,7 +12,7 @@
 */
 
 $api = app('Dingo\Api\Routing\Router');
-$api->version('v1', ['namespace' => 'App\Http\Controllers\Api\V1','prefix' => 'api/v1'], function ($api) {
+$api->version('v1', ['namespace' => 'App\Http\Controllers\Api\V1','prefix' => 'api/v1','middleware'=>'entrance'], function ($api) {
     $api->post('register', 'AuthController@register');
     $api->post('login', 'AuthController@login');
     $api->post('logout', 'AuthController@logout');

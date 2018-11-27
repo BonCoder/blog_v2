@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 
 class IndexController extends Controller
 {
+
     /**
      *
      * @param Request $request

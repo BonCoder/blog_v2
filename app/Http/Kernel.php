@@ -62,5 +62,6 @@ class Kernel extends HttpKernel
         'role'       => \Spatie\Permission\Middlewares\RoleMiddleware::class,
         'member' => \App\Http\Middleware\Member::class,
         'jwt.refresh' =>  \Tymon\JWTAuth\Http\Middleware\RefreshToken::class,
+        'entrance' => \App\Http\Middleware\Entrance::class,
     ];
 }
