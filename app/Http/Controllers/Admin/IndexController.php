@@ -45,9 +45,7 @@ class IndexController extends Controller
         $articles_all = Article::query()->count('id');
         $articles_month = Article::query()->whereMonth('created_at',Carbon::now()->month)->count('id');
 
-
-
-        return view('admin.index.index2',compact('articles_month'));
+        return view('admin.index.index2');
     }
 
     /**
