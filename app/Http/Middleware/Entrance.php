@@ -32,7 +32,7 @@ class Entrance
     {
         $ip = $request->ip();
         $url = $request->url();
-        $name = $request->user()->username ?: '游客';
+        $name = $request->user() ? $request->user()->username : '游客';
         if(!$this->cache->has($ip)){
             self::getLatIngByIp($ip,$url,$name);
             $this->cache->add($ip, $ip, 60);
