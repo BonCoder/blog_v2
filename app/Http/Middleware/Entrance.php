@@ -32,8 +32,9 @@ class Entrance
     {
         $ip = $request->ip();
         $url = $request->url();
+        $name = $request->user()->username ?: '游客';
         if(!$this->cache->has($ip)){
-            self::getLatIngByIp($ip,$url);
+            self::getLatIngByIp($ip,$url,$name);
             $this->cache->add($ip, $ip, 60);
         }
 
@@ -43,16 +44,18 @@ class Entrance
     /**
      * @param $ip
      * @param $url
+     * @param $name
      * @return \Illuminate\Http\JsonResponse
      * @author   Bob<bob@bobcoder.cc>
      */
-    protected function getLatIngByIp($ip, $url)
+    protected function getLatIngByIp($ip, $url, $name)
     {
         // 调用百度web api
         $content = file_get_contents("https://api.map.baidu.com/location/ip?ak=b1bKCarPwdp9v2jo85UjnjKCSWnK2oB9&ip={$ip}&coor=bd09ll");
         $content = json_decode($content, true);
         // 存入数据库
         $visit = new VisitLog();
+        $visit->name = $name;
         $visit->ip = $ip;
         $visit->longitude = $content['content']['point']['x']; // 经度
         $visit->latitude = $content['content']['point']['y']; // 纬度

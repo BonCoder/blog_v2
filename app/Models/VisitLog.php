@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string  url
  * @property string longitude
  * @property  string ip
+ * @property string name
  */
 class VisitLog extends Model
 {
