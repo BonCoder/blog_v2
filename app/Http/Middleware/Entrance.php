@@ -33,8 +33,8 @@ class Entrance
         $ip = $request->ip();
         $url = $request->url();
         $name = $request->user() ? $request->user()->username : '游客';
-        if(!$this->cache->has($ip)){
-            while (!self::getLatIngByIp($ip,$url,$name)){
+        if(!$this->cache->has($ip) && $ip != '127.0.0.1'){
+            if (!self::getLatIngByIp($ip,$url,$name)){
                 return response()->json(['message'=>'对不起，该IP['.$ip.']已被拉黑,禁止访问本网站！'],500);
             }
         }
