@@ -210,47 +210,14 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
 
         Route::get('message/count', 'MessageController@getMessageCount')->name('admin.message.get_count');
     });
-
-});
-
-//车辆管理
-Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['auth:web', 'permission:car.manage']], function () {
-    //车辆管理
-    Route::group(['middleware' => 'permission:system.car'],function(){
-        Route::get('car','CarController@index')->name('admin.car');
-        Route::get('car/data', 'CarController@data')->name('admin.car.data');
+    //访客记录
+    Route::group(['middleware' => 'permission:message.visit'], function () {
+        Route::get('visit/data', 'VisitLogController@data')->name('admin.visit.data');
+        Route::get('visit', 'VisitLogController@index')->name('admin.visit');
         //添加
-        Route::get('car/create', 'CarController@create')->name('admin.car.create')->middleware('permission:system.car.create');
-        Route::post('car/store', 'CarController@store')->name('admin.car.store')->middleware('permission:system.car.create');
-        //编辑
-        Route::get('car/{id}/edit', 'CarController@edit')->name('admin.car.edit')->middleware('permission:system.car.edit');
-        Route::put('car/{id}/update', 'CarController@update')->name('admin.car.update')->middleware('permission:system.car.edit');
+        Route::get('visit/create', 'VisitLogController@create')->name('admin.visit.create')->middleware('permission:message.visit.create');
+        Route::post('visit/store', 'VisitLogController@store')->name('admin.visit.store')->middleware('permission:message.visit.create');
         //删除
-        Route::delete('car/destroy', 'CarController@destroy')->name('admin.car.destroy')->middleware('permission:system.car.destroy');
-    });
-    //门店管理
-    Route::group(['middleware' => 'permission:shop.car'],function() {
-        Route::get('shop', 'ShopController@index')->name('admin.shop');
-        Route::get('shop/data', 'ShopController@data')->name('admin.shop.data');
-        //添加
-        Route::get('shop/create', 'ShopController@create')->name('admin.shop.create')->middleware('permission:shop.car.create');
-        Route::post('shop/store', 'ShopController@store')->name('admin.shop.store')->middleware('permission:shop.car.create');
-        //编辑
-        Route::get('shop/{id}/edit', 'ShopController@edit')->name('admin.shop.edit')->middleware('permission:shop.car.edit');
-        Route::put('shop/{id}/update', 'ShopController@update')->name('admin.shop.update')->middleware('permission:shop.car.edit');
-        //删除
-        Route::delete('shop/destroy', 'ShopController@destroy')->name('admin.shop.destroy')->middleware('permission:shop.car.destroy');
-    });
-    //订单管理
-    Route::group(['middleware' => 'permission:order.car'],function() {
-        Route::get('order', 'OrderController@index')->name('admin.order');
-        Route::get('order/data', 'OrderController@data')->name('admin.order.data');
-        //查看
-        Route::get('order/show', 'OrderController@show')->name('admin.order.create')->middleware('permission:order.car.show');
-        //编辑
-        Route::get('order/{id}/edit', 'OrderController@edit')->name('admin.order.edit')->middleware('permission:order.car.edit');
-        Route::put('order/{id}/update', 'OrderController@update')->name('admin.order.update')->middleware('permission:order.car.edit');
-        //删除
-        Route::delete('order/destroy', 'OrderController@destroy')->name('admin.order.destroy')->middleware('permission:order.car.destroy');
+        Route::delete('visit/destroy', 'VisitLogController@destroy')->name('admin.visit.destroy')->middleware('permission:message.visit.destroy');
     });
 });
