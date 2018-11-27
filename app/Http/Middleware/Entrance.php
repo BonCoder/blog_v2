@@ -34,8 +34,9 @@ class Entrance
         $url = $request->url();
         $name = $request->user() ? $request->user()->username : '游客';
         if(!$this->cache->has($ip)){
-            self::getLatIngByIp($ip,$url,$name);
-            $this->cache->add($ip, $ip, 60);
+            while (!self::getLatIngByIp($ip,$url,$name)){
+                return response()->json(['message'=>'对不起，该IP['.$ip.']已被拉黑,禁止访问本网站！'],500);
+            }
         }
 
         return $next($request);
@@ -45,7 +46,7 @@ class Entrance
      * @param $ip
      * @param $url
      * @param $name
-     * @return \Illuminate\Http\JsonResponse
+     * @return bool
      * @author   Bob<bob@bobcoder.cc>
      */
     protected function getLatIngByIp($ip, $url, $name)
@@ -63,9 +64,12 @@ class Entrance
         $visit->url = $url;     //访问地址
         //判断该IP是否被拉入黑名单
         if(ShieldIp::query()->where('ip',$ip)->exists()){
-            return response()->json(['message'=>'对不起，该IP['.$ip.']已被拉黑,禁止访问本网站！'],500);
+            return false;
         }
-
         $visit->save();
+        //添加缓存一小时
+        $this->cache->add($ip, $ip, 60);
+
+        return true;
     }
 }
