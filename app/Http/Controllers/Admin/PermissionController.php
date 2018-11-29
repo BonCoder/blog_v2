@@ -42,6 +42,7 @@ class PermissionController extends Controller
     public function store(PermissionCreateRequest $request)
     {
         $data = $request->all();
+        $data['guard_name'] = 'web';
         if (Permission::create($data)){
             return redirect()->to(route('admin.permission'))->with(['status'=>'添加成功']);
         }

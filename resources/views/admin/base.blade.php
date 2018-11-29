@@ -42,10 +42,10 @@
 
         //错误提示
         @if(count($errors)>0)
-            @foreach($errors->all() as $error)
-                layer.msg("{{$error}}",{icon:5});
-                @break
-            @endforeach
+            // @foreach($errors->all() as $error)
+            //     layer.msg("{{$error}}",{icon:5});
+            //     @break
+            // @endforeach
         @endif
 
         //信息提示

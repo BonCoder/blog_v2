@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Models\Advert;
 use App\Models\Article;
+use App\Models\Links;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 
@@ -70,6 +71,18 @@ class IndexController extends Controller
     public function tag(Tag $tag)
     {
         $result = $tag->orderBy('sort','desc')->get();
+
+        return response()->json($result,200);
+    }
+
+    /**
+     * @param Links $links
+     * @return \Illuminate\Http\JsonResponse
+     * @author   Bob<bob@bobcoder.cc>
+     */
+    public function links(Links $links)
+    {
+        $result = $links->where('status',1)->orderBy('sort','desc')->get();
 
         return response()->json($result,200);
     }

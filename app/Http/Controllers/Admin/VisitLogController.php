@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\ShieldIp;
 use App\Models\VisitLog;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -20,9 +21,39 @@ class VisitLogController extends Controller
 
     public function data(Request $request)
     {
-        $res = VisitLog::query()
+        $model = VisitLog::query();
+        $field = (string)$request->get('field','');
+        $keyword = (string)$request->get('keyword','');
+        $limit = (int)$request->get('limit',30);
+
+        if($field && $keyword){
+            $model->where($field,'like','%'.$keyword.'%');
+        }
+
+        $res = $model
             ->orderBy('id','desc')
-            ->orderBy('sort','desc')
+            ->paginate($limit)
+            ->toArray();
+
+        $data = [
+            'code' => 0,
+            'msg'   => '正在请求中...',
+            'count' => $res['total'],
+            'data'  => $res['data']
+        ];
+
+        return response()->json($data);
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @author   Bob<bob@bobcoder.cc>
+     */
+    public function shield(Request $request)
+    {
+        $res = ShieldIp::query()
+            ->orderBy('id','desc')
             ->paginate($request->get('limit',30))
             ->toArray();
 
@@ -54,10 +85,11 @@ class VisitLogController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
-            'ip'  => 'required|numeric'
-        ]);
-        if (VisitLog::create($request->all())){
+        $shield = new ShieldIp();
+        $shield->ip = $request->input('ip');
+        $shield->remark = $request->input('remark');
+
+        if ($shield->save()){
             return redirect(route('admin.visit'))->with(['status'=>'添加完成']);
         }
 
@@ -77,6 +109,25 @@ class VisitLogController extends Controller
             return response()->json(['code'=>1,'msg'=>'请选择删除项']);
         }
         if (VisitLog::destroy($ids)){
+            return response()->json(['code'=>0,'msg'=>'删除成功']);
+        }
+
+        return response()->json(['code'=>1,'msg'=>'删除失败']);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function del(Request $request)
+    {
+        $ids = $request->get('ids');
+        if (empty($ids)){
+            return response()->json(['code'=>1,'msg'=>'请选择删除项']);
+        }
+        if (ShieldIp::destroy($ids)){
             return response()->json(['code'=>0,'msg'=>'删除成功']);
         }
 

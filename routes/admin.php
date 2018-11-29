@@ -33,6 +33,8 @@ Route::group(['namespace'=>'Admin','prefix'=>'admin','middleware'=>'auth:web'],f
     Route::get('/index2','IndexController@index2')->name('admin.index2');
     //图标
     Route::get('icons','IndexController@icons')->name('admin.icons');
+    //用户分布图
+    Route::get('area','IndexController@area')->name('admin.area');
 });
 
 //系统管理
@@ -175,6 +177,20 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
         //删除
         Route::delete('advert/destroy', 'AdvertController@destroy')->name('admin.advert.destroy')->middleware('permission:config.advert.destroy');
     });
+    //友情链接
+    Route::group(['middleware' => 'permission:config.links'], function () {
+        Route::get('links/data', 'LinksController@data')->name('admin.links.data');
+        Route::get('links', 'LinksController@index')->name('admin.links');
+        Route::post('links/status', 'LinksController@status')->name('admin.links.status');
+        //添加
+        Route::get('links/create', 'LinksController@create')->name('admin.links.create')->middleware('permission:config.links.create');
+        Route::post('links/store', 'LinksController@store')->name('admin.links.store')->middleware('permission:config.links.create');
+        //编辑
+        Route::get('links/{id}/edit', 'LinksController@edit')->name('admin.links.edit')->middleware('permission:config.links.edit');
+        Route::put('links/{id}/update', 'LinksController@update')->name('admin.links.update')->middleware('permission:config.links.edit');
+        //删除
+        Route::delete('links/destroy', 'LinksController@destroy')->name('admin.links.destroy')->middleware('permission:config.links.destroy');
+    });
 });
 //会员管理
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['auth:web', 'permission:member.manage']], function () {
@@ -213,11 +229,13 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
     //访客记录
     Route::group(['middleware' => 'permission:message.visit'], function () {
         Route::get('visit/data', 'VisitLogController@data')->name('admin.visit.data');
+        Route::get('visit/shield', 'VisitLogController@shield')->name('admin.visit.shield');
         Route::get('visit', 'VisitLogController@index')->name('admin.visit');
         //添加
         Route::get('visit/create', 'VisitLogController@create')->name('admin.visit.create')->middleware('permission:message.visit.create');
         Route::post('visit/store', 'VisitLogController@store')->name('admin.visit.store')->middleware('permission:message.visit.create');
         //删除
         Route::delete('visit/destroy', 'VisitLogController@destroy')->name('admin.visit.destroy')->middleware('permission:message.visit.destroy');
+        Route::delete('visit/del', 'VisitLogController@del')->name('admin.visit.del');
     });
 });

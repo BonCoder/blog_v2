@@ -34,9 +34,9 @@
     //统一错误提示信息
     @if(count($errors)>0)
     var errorStr = '';
-    @foreach($errors->all() as $error)
-        errorStr += "{{$error}}<br />";
-    @endforeach
+    // @foreach($errors->all() as $error)
+    //     errorStr += "{{$error}}<br />";
+    // @endforeach
         layer.msg(errorStr);
     @endif
 

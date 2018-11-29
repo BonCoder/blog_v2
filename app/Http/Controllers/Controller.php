@@ -15,6 +15,12 @@ class Controller extends BaseController
 
     /**
      * 处理权限分类
+     * @param array $list
+     * @param string $pk
+     * @param string $pid
+     * @param string $child
+     * @param int $root
+     * @return array
      */
     public function tree($list=[], $pk='id', $pid = 'parent_id', $child = '_child', $root = 0)
     {

@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Area;
 use App\Models\Article;
 use App\Models\Icon;
+use App\Models\Member;
 use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
+use App\Models\VisitLog;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -42,10 +45,49 @@ class IndexController extends Controller
      */
     public function index2()
     {
+        //文章总数
         $articles_all = Article::query()->count('id');
+        //当月文章总数
         $articles_month = Article::query()->whereMonth('created_at',Carbon::now()->month)->count('id');
+        //访客总数
+        $visit_all = VisitLog::query()->distinct()->count('ip');
+        //当月访客总数
+        $visit_month = VisitLog::query()->whereMonth('created_at',Carbon::now()->month)->distinct()->count('ip');
+        //用户总数
+        $members_all = Member::query()->count('id');
+        //当月用户新增总数
+        $members_month = Member::query()->whereMonth('created_at',Carbon::now()->month)->count('id');
 
-        return view('admin.index.index2');
+        $articles = Article::query()
+            ->with('tags')
+            ->select('id','title','created_at','content')
+            ->limit(10)
+            ->orderBy('created_at','desc')
+            ->get();
+
+        $area = Area::query()->select('name','value')->orderBy('value','desc')->limit(8)->get();
+
+        $data = [
+            'articles_all'=>$articles_all,
+            'articles_month'=>$articles_month,
+            'visit_all'=>$visit_all,
+            'visit_month'=>$visit_month,
+            'members_all'=>$members_all,
+            'members_month'=>$members_month
+            ];
+
+        return view('admin.index.index2',['data'=>$data,'articles'=>$articles,'area'=>$area]);
+    }
+
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     * @author   Bob<bob@bobcoder.cc>
+     */
+    public function area()
+    {
+        $data = Area::query()->select('name','value')->get();
+
+        return response()->json($data,200);
     }
 
     /**

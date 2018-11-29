@@ -6,6 +6,8 @@ Route::post('/sendMsg', 'PublicController@sendMsg')->name('sendMsg');
 
 Route::get('/','Home\IndexController@index')->name('home');
 
+Route::get('/article','Home\IndexController@article');
+
 Route::get('/test',function (){
     return view('home.index');
 });

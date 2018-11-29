@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Area;
 use App\Models\ShieldIp;
 use App\Models\VisitLog;
 use Closure;
@@ -31,7 +32,7 @@ class Entrance
     public function handle($request, Closure $next)
     {
         $ip = $request->ip();
-        $url = $request->url();
+        $url = $request->fullUrl();
         $name = $request->user() ? $request->user()->username : '游客';
         if(!$this->cache->has($ip) && $ip != '127.0.0.1'){
             if (!self::getLatIngByIp($ip,$url,$name)){
@@ -62,6 +63,9 @@ class Entrance
         $visit->latitude = $content['content']['point']['y']; // 纬度
         $visit->address = $content['content']['address']; // 城市地址
         $visit->url = $url;     //访问地址
+        $address = explode('|',$content['address'])[1];
+        $area = Area::query()->where('name',$address)->first();
+        $area->increment('value',1);
         //判断该IP是否被拉入黑名单
         if(ShieldIp::query()->where('ip',$ip)->exists()){
             return false;
