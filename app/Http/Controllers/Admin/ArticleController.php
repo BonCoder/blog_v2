@@ -31,14 +31,23 @@ class ArticleController extends Controller
     public function data(Request $request)
     {
 
-        $model = Article::query();
-        if ($request->get('category_id')){
-            $model = $model->where('category_id',$request->get('category_id'));
-        }
-        if ($request->get('title')){
-            $model = $model->where('title','like','%'.$request->get('title').'%');
-        }
-        $res = $model->orderBy('created_at','desc')->with(['tags','category'])->paginate($request->get('limit',30))->toArray();
+        $article = new Article();
+        $category_id = (int)$request->get('category_id','');
+        $title = (string)$request->get('title','');
+        $limit = (int)$request->get('limit',30);
+
+        $res = $article
+            ->with(['tags','category'])
+            ->when($title,function ($query) use ($title){
+                $query->where('title','like','%'.$title.'%');
+            })
+            ->when($category_id,function ($query) use ($category_id){
+                $query->where('category_id',$category_id);
+            })
+            ->orderBy('created_at','desc')
+            ->paginate($limit)
+            ->toArray();
+
         $data = [
             'code' => 0,
             'msg'   => '正在请求中...',

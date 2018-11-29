@@ -63,14 +63,17 @@ class Entrance
         $visit->latitude = $content['content']['point']['y']; // 纬度
         $visit->address = $content['content']['address']; // 城市地址
         $visit->url = $url;     //访问地址
-        $address = explode('|',$content['address'])[1];
-        $area = Area::query()->where('name',$address)->first();
-        $area->increment('value',1);
         //判断该IP是否被拉入黑名单
         if(ShieldIp::query()->where('ip',$ip)->exists()){
             return false;
         }
         $visit->save();
+        //判定IP是否存在
+        if(VisitLog::query()->where('ip',$ip)->doesntExist()){
+            $address = explode('|',$content['address'])[1];
+            $area = Area::query()->where('name',$address)->first();
+            $area->increment('value',1);
+        }
         //添加缓存一小时
         $this->cache->add($ip, $ip, 60);
 
