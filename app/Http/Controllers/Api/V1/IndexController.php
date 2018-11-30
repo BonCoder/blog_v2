@@ -21,24 +21,32 @@ class IndexController extends Controller
     /**
      *
      * @param Request $request
+     * @param Article $article
      * @return \Illuminate\Http\JsonResponse
      * @author   Bob<bob@bobcoder.cc>
      */
-    public function index(Request $request)
+    public function index(Request $request,Article $article)
     {
-        $limit = $request->query('limit',5);
+        $limit = $request->query('limit',10);
         $offset = $request->query('offset', 0);
+        $category_id = (int)$request->get('category_id','');
+        $tag_id = (int)$request->get('tag_id','');
+        $title = (string)$request->get('title','');
 
-        $model = Article::query();
-
-        if ($request->get('category_id')){
-            $model = $model->where('category_id',$request->get('category_id'));
-        }
-        if ($request->get('title')){
-            $model = $model->where('title','like','%'.$request->get('title').'%');
-        }
-
-        $result = $model->orderBy('created_at','desc')
+        $result = $article
+            ->when($title,function ($query) use ($title){
+                $query->where('title','like','%'.$title.'%');
+            })
+            ->when($category_id,function ($query) use ($category_id){
+                $query->where('category_id',$category_id);
+            })
+            ->when($tag_id,function ($query) use ($tag_id){
+                $query->select('articles.*','article_tag.tag_id')
+                    ->leftJoin('article_tag','articles.id','=','article_tag.article_id')
+                    ->where('article_tag.tag_id',$tag_id);
+            })
+            ->where('status',1)
+            ->orderBy('created_at','desc')
             ->with(['tags','category'])
             ->limit($limit)
             ->offset($offset)
@@ -70,7 +78,7 @@ class IndexController extends Controller
      */
     public function tag(Tag $tag)
     {
-        $result = $tag->orderBy('sort','desc')->get();
+        $result = $tag->orderBy('sort','desc')->orderBy('created_at','desc')->get();
 
         return response()->json($result,200);
     }
@@ -82,7 +90,7 @@ class IndexController extends Controller
      */
     public function links(Links $links)
     {
-        $result = $links->where('status',1)->orderBy('sort','desc')->get();
+        $result = $links->where('status',1)->orderBy('sort','desc')->orderBy('created_at','desc')->get();
 
         return response()->json($result,200);
     }

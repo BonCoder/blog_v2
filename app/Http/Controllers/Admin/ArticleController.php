@@ -30,7 +30,6 @@ class ArticleController extends Controller
      */
     public function data(Request $request)
     {
-
         $article = new Article();
         $category_id = (int)$request->get('category_id','');
         $title = (string)$request->get('title','');
@@ -166,4 +165,15 @@ class ArticleController extends Controller
         return response()->json(['code'=>0,'msg'=>'删除成功']);
     }
 
+    public function status(Request $request)
+    {
+        $id = (int)$request->input('id');
+        $field = $request->input('field');
+
+        $article = Article::find($id);
+        $article->$field = $article->$field == 1 ? 0 : 1 ;
+        $article->save();
+
+        return response()->json(['code'=>1,'msg'=>'更新成功']);
+    }
 }

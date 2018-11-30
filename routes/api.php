@@ -24,6 +24,11 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api\V1','prefix' => 'a
         $api->post('refresh', 'AuthController@refresh');
     });
 
+    //开发文档说明
+    $api->get('doc',function (){
+        $doc = file_get_contents(base_path().'\doc\blog-api.md');
+        return view('home.doc.index',['doc'=>$doc]);
+    });
     //文章列表
     $api->get('article','IndexController@index');
     //获取广告位

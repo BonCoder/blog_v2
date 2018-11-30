@@ -59,6 +59,24 @@
             <script type="text/html" id="category">
                 @{{ d.category.name }}
             </script>
+            <script type="text/html" id="status">
+                @{{# if(d.status == 1){ }}
+                <input type="checkbox" name="status" lay-skin="switch" value="@{{ d.id }}" class="status" lay-text="是|否" lay-filter="status" checked>
+                <div class="layui-unselect layui-form-switch layui-form-onswitch" lay-skin="_switch"><em>是</em><i></i></div>
+                @{{# }else{ }}
+                <input type="checkbox" name="status" lay-skin="switch" value="@{{ d.id }}" class="status" lay-text="是|否" lay-filter="status">
+                <div class="layui-unselect layui-form-switch layui-form-onswitch" lay-skin="_switch"><em>否</em><i></i></div>
+                @{{# } }}
+            </script>
+            <script type="text/html" id="recommend">
+                @{{# if(d.recommend == 1){ }}
+                <input type="checkbox" name="status" lay-skin="switch" value="@{{ d.id }}" class="recommend" lay-text="是|否" lay-filter="recommend" checked>
+                <div class="layui-unselect layui-form-switch layui-form-onswitch" lay-skin="_switch"><em>是</em><i></i></div>
+                @{{# }else{ }}
+                <input type="checkbox" name="status" lay-skin="switch" value="@{{ d.id }}" class="recommend" lay-text="是|否" lay-filter="recommend">
+                <div class="layui-unselect layui-form-switch layui-form-onswitch" lay-skin="_switch"><em>否</em><i></i></div>
+                @{{# } }}
+            </script>
         </div>
     </div>
 @endsection
@@ -85,8 +103,9 @@
                         ,{field: 'keywords', title: '关键词'}
                         ,{field: 'tags', title: '标签',toolbar:'#tags',width:200}
                         ,{field: 'click', title: '点击量',width:80}
+                        ,{field: 'status', title: '状态', toolbar: '#status'}
+                        ,{field: 'recommend', title: '推荐', toolbar: '#recommend'}
                         ,{field: 'created_at', title: '创建时间',width:180}
-                        ,{field: 'updated_at', title: '更新时间',width:180}
                         ,{fixed: 'right', width: 220, align:'center', toolbar: '#options'}
                     ]]
                 });
@@ -108,6 +127,46 @@
                     } else if(layEvent === 'edit'){
                         location.href = '/admin/article/'+data.id+'/edit';
                     }
+                });
+
+                form.on('switch(status)', function(data){
+                    var index = layer.msg('修改中，请稍候',{icon: 16,time:false,shade:0.5});
+                    $.ajax({
+                        type : "POST",
+                        url  : "{{ route('admin.article.status') }}",
+                        data : {'id':data.value,'field':'status'},
+                        success : function(res) {
+                            layer.close(index);
+                            if(res.code===1){
+                                layer.msg(res.msg,{time:1000,icon:1});
+                            }else{
+                                layer.msg(res.msg,{time:1000,icon:2});
+                            }
+                        },
+                        error:function(){
+                            layer.msg('修改失败！',{time:1000,icon:2});
+                        }
+                    });
+                });
+
+                form.on('switch(recommend)', function(data){
+                    var index = layer.msg('修改中，请稍候',{icon: 16,time:false,shade:0.5});
+                    $.ajax({
+                        type : "POST",
+                        url  : "{{ route('admin.article.status') }}",
+                        data : {'id':data.value,'field':'recommend'},
+                        success : function(res) {
+                            layer.close(index);
+                            if(res.code===1){
+                                layer.msg(res.msg,{time:1000,icon:1});
+                            }else{
+                                layer.msg(res.msg,{time:1000,icon:2});
+                            }
+                        },
+                        error:function(){
+                            layer.msg('修改失败！',{time:1000,icon:2});
+                        }
+                    });
                 });
 
                 @can('zixun.article.edit')

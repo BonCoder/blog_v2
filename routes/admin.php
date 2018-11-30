@@ -121,6 +121,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
     Route::group(['middleware' => 'permission:zixun.article'], function () {
         Route::get('article/data', 'ArticleController@data')->name('admin.article.data');
         Route::get('article', 'ArticleController@index')->name('admin.article');
+        Route::post('status', 'ArticleController@status')->name('admin.article.status');
         //添加
         Route::get('article/create', 'ArticleController@create')->name('admin.article.create')->middleware('permission:zixun.article.create');
         Route::post('article/store', 'ArticleController@store')->name('admin.article.store')->middleware('permission:zixun.article.create');
