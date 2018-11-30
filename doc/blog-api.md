@@ -4,11 +4,9 @@
 
 ### 用户注册
 
-`api/v1/register`
+#### 请求地址
 
-#### 请求方法
-
-`post`
+ &hearts; `post` : `api/v1/register`
 
 #### 请求参数
 | 名称 | 类型 | 描述 |
@@ -16,10 +14,6 @@
 | name    | string    |  用户名  |
 | email    | string  |  邮箱  |
 | password | string | 密码 |
-
-#### HTTP状态码
-
-200
 
 #### 返回体
 
@@ -40,11 +34,9 @@
 
 ### 用户登陆
 
-`api/v1/login`
+#### 请求地址
 
-#### 请求方法
-
-`post`
+ &hearts; `post` : `api/v1/login`
 
 #### 请求参数
 | 名称 | 类型 | 描述 |
@@ -52,15 +44,11 @@
 | email    | string  |  邮箱  |
 | password | string | 密码 |
 
-#### HTTP状态码
-
-200
-
 #### 返回体
 
 ```json5
 {
-    "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vd3d3LmJvYi5jb20vYXBpL3YxL2xvZ2luIiwiaWF0IjoxNTQzNTYxOTQwLCJleHAiOjE1NDM1NjU1NDAsIm5iZiI6MTU0MzU2MTk0MCwianRpIjoiREdGUUZDaTdpdmE1bnhqdyIsInN1YiI6NiwicHJ2IjoiODY2NWFlOTc3NWNmMjZmNmI4ZTQ5NmY4NmZhNTM2ZDY4ZGQ3MTgxOCJ9._v10ZX9y6GA90R-T-pGSHeEAcsVkRTzvRD_yrbljwhA",
+    "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9._v10ZX9y6GA90R-T-pGSHeEAcsVkRTzvRD_yrbljwhA",
     "token_type": "bearer",
     "expires_in": 3600
 }
@@ -75,19 +63,14 @@
 
 
 ### 个人信息
-`api/v1/me`
 
-#### 请求方法
+#### 请求地址
 
-`post`
+ &hearts; `post` : `api/v1/me`
 
 #### 请求参数
 
 无
-
-#### HTTP状态码
-
-200
 
 #### 返回体
 
@@ -116,25 +99,20 @@
 | email    | string      | yes       |  邮箱  |
 
 ### 获取新token
-`api/v1/refresh`
 
-#### 请求方法
+#### 请求地址
 
-`post`
+ &hearts; `post` : `api/v1/refresh`
 
 #### 请求参数
 
 无
 
-#### HTTP状态码
-
-200
-
 #### 返回体
 
 ```json5
 {
-    "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vd3d3LmJvYi5jb20vYXBpL3YxL2xvZ2luIiwiaWF0IjoxNTQzNTYxOTQwLCJleHAiOjE1NDM1NjU1NDAsIm5iZiI6MTU0MzU2MTk0MCwianRpIjoiREdGUUZDaTdpdmE1bnhqdyIsInN1YiI6NiwicHJ2IjoiODY2NWFlOTc3NWNmMjZmNmI4ZTQ5NmY4NmZhNTM2ZDY4ZGQ3MTgxOCJ9._v10ZX9y6GA90R-T-pGSHeEAcsVkRTzvRD_yrbljwhA",
+    "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9._v10ZX9y6GA90R-T-pGSHeEAcsVkRTzvRD_yrbljwhA",
     "token_type": "bearer",
     "expires_in": 3600
 }
@@ -150,11 +128,9 @@
 
 ## 文章列表
 
-`api/v1/article`
+### 请求地址
 
-### 请求方法
-
-`get `
+ &hearts; `get` : `api/v1/article`
 
 ### 请求参数
 | 名称 | 类型 | 描述 |
@@ -164,11 +140,6 @@
 | category_id | int | 分类ID |
 | tag_id | int | 标签ID |
 | title | string | 标题 |
-
-
-### HTTP状态码
-
-200
 
 ### 返回体
 
@@ -267,20 +238,14 @@
 
 ## 获取广告位
 
-`api/v1/adverts`
+### 请求地址
 
-### 请求方法
-
-`get `
+ &hearts; `get` : `api/v1/adverts`
 
 ### 请求参数
 | 名称 | 类型 | 描述 |
 |:----:|:----:|------|
 | position_id    | int    | 广告位置ID 默认为1(首页)  |
-
-### HTTP状态码
-
-200
 
 ### 返回体
 
@@ -336,19 +301,13 @@
 
 ## 获取所有标签
 
-`api/v1/tag`
+### 请求地址
 
-### 请求方法
-
-`get `
+ &hearts; `get` : `api/v1/tag`
 
 ### 请求参数
 无
-
-### HTTP状态码
-
-200
-
+ 
 ### 返回体
 
 ```json5
@@ -387,18 +346,12 @@
 
 ## 获取所有友链
 
-`api/v1/links`
+### 请求地址
 
-### 请求方法
-
-`get `
+ &hearts; `get` : `api/v1/links`
 
 ### 请求参数
 无
-
-### HTTP状态码
-
-200
 
 ### 返回体
 
@@ -430,20 +383,14 @@
 
 ## 文章详情
 
-`api/v1/article/{article}`
+### 请求地址
 
-### 请求方法
-
-`get `
+ &hearts; `get` : `api/v1/article/{article}`
 
 ### 请求参数
 | 名称     | 类型     | 描述     | 
 |----------|:--------:|:--------:|
 |   article      | int      | 文章ID    |
-
-### HTTP状态码
-
-200
 
 ### 返回体
 
@@ -519,20 +466,14 @@
 
 ## 站点基本信息
 
-`api/v1/site`
+### 请求地址
 
-### 请求方法
-
-`get`
+ &hearts; `get` : `api/v1/site` 
 
 ### 请求参数
 
 无
    
-### HTTP状态码
-
-200
-
 ### 返回体
 
 ```json5
