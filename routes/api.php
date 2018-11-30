@@ -26,7 +26,7 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api\V1','prefix' => 'a
 
     //开发文档说明
     $api->get('doc',function (){
-        $doc = file_get_contents(base_path().'\doc\blog-api.md');
+        $doc = file_get_contents(base_path().DIRECTORY_SEPARATOR.'doc'.DIRECTORY_SEPARATOR.'blog-api.md');
         return view('home.doc.index',['doc'=>$doc]);
     });
     //文章列表
