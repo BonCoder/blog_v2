@@ -29,6 +29,9 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api\V1','prefix' => 'a
         $doc = file_get_contents(base_path().DIRECTORY_SEPARATOR.'doc'.DIRECTORY_SEPARATOR.'blog-api.md');
         return view('home.doc.index',['doc'=>$doc]);
     });
+
+    //站点基本信息
+    $api->get('site','IndexController@site');
     //文章列表
     $api->get('article','IndexController@index');
     //获取广告位
@@ -39,4 +42,5 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api\V1','prefix' => 'a
     $api->get('links','IndexController@links');
     //获取文章详情
     $api->get('article/{article}','ArticleController@detail')->where(['article' => '[0-9]+']);
+
 });

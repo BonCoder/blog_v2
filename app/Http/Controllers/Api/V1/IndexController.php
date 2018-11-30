@@ -12,6 +12,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Advert;
 use App\Models\Article;
 use App\Models\Links;
+use App\Models\Site;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 
@@ -93,6 +94,22 @@ class IndexController extends Controller
         $result = $links->where('status',1)->orderBy('sort','desc')->orderBy('created_at','desc')->get();
 
         return response()->json($result,200);
+    }
+
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     * @author   Bob<bob@bobcoder.cc>
+     */
+    public function site()
+    {
+        $data = Site::query()->get();
+        $object = (object)[];
+
+        foreach ($data as $res){
+            $object->{$res->key} =$res->value;
+        }
+
+        return response()->json($object,200);
     }
 
 
