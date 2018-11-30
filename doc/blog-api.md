@@ -516,3 +516,42 @@
 | category.id    | int      | yes       |  分类ID  |
 | category.name  | string      | yes       |  分类名称  |
 
+
+## 站点基本信息
+
+`api/v1/site`
+
+### 请求方法
+
+`get`
+
+### 请求参数
+
+无
+   
+### HTTP状态码
+
+200
+
+### 返回体
+
+```json5
+{
+    "title": "Bob的博客-PHP-Java-mysql--Bob的博客|技术博客|个人博客",
+    "keywords": "Bob的博客,Linux,Windows,bobcoder,个人主页,php,java,技术博客,个人博客,mysql,nginx,Bob,laravel",
+    "description": "Bob的博客是一个关注网站建设、网络推广、Html5+css3、Java、PHP、Mysql等技术分享的博客,提供博主在学习成果和工作中经验总结，是一个互联网从业者值得收藏的网站。",
+    "copyright": "2017-2019 https://www.bobcoder.cc/ All Rights Reserved |  蜀ICP备17022542号-1",
+    "phone": "18040363559",
+    "city": "四川成都"
+}
+```
+### 返回字段
+
+| name     | type     | must     | description |
+|----------|:--------:|:--------:|:--------:|
+| title    | string      | yes       |  标题  |
+| keywords    | string      | yes       |  关键字  |
+| description    | string      | yes       |  描述  |
+| copyright    | string      | yes       |  版权  |
+| city    | string      | yes       |  城市  |
+| phone    | string      | yes       |  手机号  |
