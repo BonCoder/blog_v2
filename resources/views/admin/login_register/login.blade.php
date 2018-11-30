@@ -1,45 +1,61 @@
 @extends('admin.login_register.base')
 
 @section('content')
-    <div class="layadmin-user-login-box layadmin-user-login-body layui-form">
-        <form action="{{route('admin.login')}}" method="post">
-            {{csrf_field()}}
-            <div class="layui-form-item">
-                <label class="layadmin-user-login-icon layui-icon layui-icon-username" for="LAY-user-login-username"></label>
-                <input type="text" name="username" value="{{old('username')}}" lay-verify="required" placeholder="用户名" class="layui-input">
-            </div>
-            <div class="layui-form-item">
-                <label class="layadmin-user-login-icon layui-icon layui-icon-password" for="LAY-user-login-password"></label>
-                <input type="password" name="password"  lay-verify="required" placeholder="密码" class="layui-input">
-            </div>
-            {{--<div class="layui-form-item">
-                <div class="layui-row">
-                    <div class="layui-col-xs7">
-                        <label class="layadmin-user-login-icon layui-icon layui-icon-vercode" for="LAY-user-login-vercode"></label>
-                        <input type="text" name="vercode" id="LAY-user-login-vercode" lay-verify="required" placeholder="图形验证码" class="layui-input">
-                    </div>
-                    <div class="layui-col-xs5">
-                        <div style="margin-left: 10px;">
-                            <img src="https://www.oschina.net/action/user/captcha" class="layadmin-user-login-codeimg" id="LAY-user-get-vercode">
-                        </div>
+
+<div class="limiter">
+    <div class="container-login100" style="background-image: url('/static/admin/images/bg-01.jpg');">
+        <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
+            <form class="login100-form validate-form" action="{{route('admin.login')}}" method="post">
+                {{csrf_field()}}
+                <span class="login100-form-title p-b-49">登录</span>
+
+                <div class="wrap-input100 validate-input m-b-23" data-validate="请输入用户名">
+                    <span class="label-input100">用户名</span>
+                    <input class="input100" type="text" name="username" value="{{old('username')}}" placeholder="请输入用户名" autocomplete="off">
+                    <span class="focus-input100" data-symbol="&#xf206;"></span>
+                </div>
+
+                <div class="wrap-input100 validate-input" data-validate="请输入密码">
+                    <span class="label-input100">密码</span>
+                    <input class="input100" type="password" name="password" placeholder="请输入密码">
+                    <span class="focus-input100" data-symbol="&#xf190;"></span>
+                </div>
+
+                <div class="text-right p-t-8 p-b-31">
+                    <a href="javascript:">忘记密码？</a>
+                </div>
+
+                <div class="container-login100-form-btn">
+                    <div class="wrap-login100-form-btn">
+                        <div class="login100-form-bgbtn"></div>
+                        <button class="login100-form-btn">登 录</button>
                     </div>
                 </div>
-            </div>--}}
-            <div class="layui-form-item" style="margin-bottom: 20px;">
-                <input type="checkbox" name="remember" lay-skin="primary" title="记住密码">
-                <a href="forget.html" class="layadmin-user-jump-change layadmin-link" style="margin-top: 7px;">忘记密码？</a>
-            </div>
-            <div class="layui-form-item">
-                <button type="submit" class="layui-btn layui-btn-fluid" lay-submit lay-filter="">登 入</button>
-            </div>
-        </form>
-        <div class="layui-trans layui-form-item layadmin-user-login-other">
-            <label>社交账号登入</label>
-            <a href="javascript:;"><i class="layui-icon layui-icon-login-qq"></i></a>
-            <a href="javascript:;"><i class="layui-icon layui-icon-login-wechat"></i></a>
-            <a href="javascript:;"><i class="layui-icon layui-icon-login-weibo"></i></a>
 
-            <a href="reg.html" class="layadmin-user-jump-change layadmin-link">注册帐号</a>
+<!--                <div class="txt1 text-center p-t-54 p-b-20">-->
+<!--                    <span>第三方登录</span>-->
+<!--                </div>-->
+<!---->
+<!--                <div class="flex-c-m">-->
+<!--                    <a href="#" class="login100-social-item bg1">-->
+<!--                        <i class="fa fa-wechat"></i>-->
+<!--                    </a>-->
+<!---->
+<!--                    <a href="#" class="login100-social-item bg2">-->
+<!--                        <i class="fa fa-qq"></i>-->
+<!--                    </a>-->
+<!---->
+<!--                    <a href="#" class="login100-social-item bg3">-->
+<!--                        <i class="fa fa-weibo"></i>-->
+<!--                    </a>-->
+<!--                </div>-->
+
+<!--                <div class="flex-col-c p-t-25">-->
+<!--                    <a href="javascript:" class="txt2">立即注册</a>-->
+<!--                </div>-->
+            </form>
         </div>
     </div>
+</div>
+
 @endsection
