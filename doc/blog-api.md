@@ -1,5 +1,153 @@
 # Blog_V2 API 文档
 [TOC]
+## 用户
+
+### 用户注册
+
+`api/v1/register`
+
+#### 请求方法
+
+`post`
+
+#### 请求参数
+| 名称 | 类型 | 描述 |
+|:----:|:----:|------|
+| name    | string    |  用户名  |
+| email    | string  |  邮箱  |
+| password | string | 密码 |
+
+#### HTTP状态码
+
+200
+
+#### 返回体
+
+```json5
+{
+    "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vd3d3LmJvYi5jb20vYXBpL3YxL2xvZ2luIiwiaWF0IjoxNTQzNTYxOTQwLCJleHAiOjE1NDM1NjU1NDAsIm5iZiI6MTU0MzU2MTk0MCwianRpIjoiREdGUUZDaTdpdmE1bnhqdyIsInN1YiI6NiwicHJ2IjoiODY2NWFlOTc3NWNmMjZmNmI4ZTQ5NmY4NmZhNTM2ZDY4ZGQ3MTgxOCJ9._v10ZX9y6GA90R-T-pGSHeEAcsVkRTzvRD_yrbljwhA",
+    "token_type": "bearer",
+    "expires_in": 3600
+}
+```
+#### 返回字段
+
+| name     | type     | must     | description |
+|----------|:--------:|:--------:|:--------:|
+| access_token    | string      | yes       |  token  |
+| category_id    | string      | yes       |  token类型  |
+| expires_in    | string      | yes       |  过期时间  |
+
+### 用户登陆
+
+`api/v1/login`
+
+#### 请求方法
+
+`post`
+
+#### 请求参数
+| 名称 | 类型 | 描述 |
+|:----:|:----:|------|
+| email    | string  |  邮箱  |
+| password | string | 密码 |
+
+#### HTTP状态码
+
+200
+
+#### 返回体
+
+```json5
+{
+    "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vd3d3LmJvYi5jb20vYXBpL3YxL2xvZ2luIiwiaWF0IjoxNTQzNTYxOTQwLCJleHAiOjE1NDM1NjU1NDAsIm5iZiI6MTU0MzU2MTk0MCwianRpIjoiREdGUUZDaTdpdmE1bnhqdyIsInN1YiI6NiwicHJ2IjoiODY2NWFlOTc3NWNmMjZmNmI4ZTQ5NmY4NmZhNTM2ZDY4ZGQ3MTgxOCJ9._v10ZX9y6GA90R-T-pGSHeEAcsVkRTzvRD_yrbljwhA",
+    "token_type": "bearer",
+    "expires_in": 3600
+}
+```
+#### 返回字段
+
+| name     | type     | must     | description |
+|----------|:--------:|:--------:|:--------:|
+| access_token    | string      | yes       |  token  |
+| category_id    | string      | yes       |  token类型  |
+| expires_in    | string      | yes       |  过期时间  |
+
+
+### 个人信息
+`api/v1/me`
+
+#### 请求方法
+
+`post`
+
+#### 请求参数
+
+无
+
+#### HTTP状态码
+
+200
+
+#### 返回体
+
+```json5
+{
+    "id": 6,
+    "phone": null,
+    "name": "Bob5",
+    "avatar": null,
+    "uuid": "2e24dc6a-a259-325c-a19a-32bb48bb3fc0",
+    "deleted_at": null,
+    "created_at": "2018-11-30 15:11:55",
+    "updated_at": "2018-11-30 15:11:55",
+    "email": "1233@qq.com"
+}
+```
+#### 返回字段
+
+| name     | type     | must     | description |
+|----------|:--------:|:--------:|:--------:|
+| id    | int      | yes       |  用户ID  |
+| phone    | string      | yes       |  手机号  |
+| name    | string      | yes       |  用户名  |
+| avatar    | string      | yes       |  头像  |
+| uuid    | string      | yes       |  UUID  |
+| email    | string      | yes       |  邮箱  |
+
+### 获取新token
+`api/v1/refresh`
+
+#### 请求方法
+
+`post`
+
+#### 请求参数
+
+无
+
+#### HTTP状态码
+
+200
+
+#### 返回体
+
+```json5
+{
+    "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vd3d3LmJvYi5jb20vYXBpL3YxL2xvZ2luIiwiaWF0IjoxNTQzNTYxOTQwLCJleHAiOjE1NDM1NjU1NDAsIm5iZiI6MTU0MzU2MTk0MCwianRpIjoiREdGUUZDaTdpdmE1bnhqdyIsInN1YiI6NiwicHJ2IjoiODY2NWFlOTc3NWNmMjZmNmI4ZTQ5NmY4NmZhNTM2ZDY4ZGQ3MTgxOCJ9._v10ZX9y6GA90R-T-pGSHeEAcsVkRTzvRD_yrbljwhA",
+    "token_type": "bearer",
+    "expires_in": 3600
+}
+```
+#### 返回字段
+
+| name     | type     | must     | description |
+|----------|:--------:|:--------:|:--------:|
+| access_token    | string      | yes       |  token  |
+| category_id    | string      | yes       |  token类型  |
+| expires_in    | string      | yes       |  过期时间  |
+
+
 ## 文章列表
 
 `api/v1/article`
