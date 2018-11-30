@@ -67,13 +67,15 @@ class Entrance
         if(ShieldIp::query()->where('ip',$ip)->exists()){
             return false;
         }
-        $visit->save();
         //判定IP是否存在
         if(VisitLog::query()->where('ip',$ip)->doesntExist()){
             $address = explode('|',$content['address'])[1];
             $area = Area::query()->where('name',$address)->first();
             $area->increment('value',1);
         }
+
+        $visit->save();
+
         //添加缓存一小时
         $this->cache->add($ip, $ip, 60);
 
