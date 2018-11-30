@@ -11,7 +11,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 class Member extends Authenticatable implements JWTSubject
 {
     protected $table = 'members';
-    protected $fillable = ['phone','name','password','avatar','remember_token','uuid'];
+    protected $fillable = ['phone','name','password','avatar','remember_token','uuid','email'];
     protected $hidden = ['password','remember_token'];
 
 

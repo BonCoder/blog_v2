@@ -28,6 +28,9 @@ class MemberController extends Controller
         if ($request->get('phone')){
             $model = $model->where('phone','like','%'.$request->get('phone').'%');
         }
+        if ($request->get('email')){
+            $model = $model->where('email','like','%'.$request->get('phone').'%');
+        }
         $res = $model->orderBy('created_at','desc')->paginate($request->get('limit',30))->toArray();
         $data = [
             'code' => 0,

@@ -59,6 +59,7 @@
                         ,{field: 'id', title: 'ID', sort: true,width:80}
                         ,{field: 'name', title: '昵称'}
                         ,{field: 'phone', title: '手机'}
+                        ,{field: 'email', title: '邮箱'}
                         ,{field: 'avatar', title: '头像',toolbar:'#avatar',width:100}
                         ,{field: 'created_at', title: '创建时间'}
                         ,{field: 'updated_at', title: '更新时间'}

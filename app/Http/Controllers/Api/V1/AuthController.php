@@ -9,7 +9,9 @@ namespace App\Http\Controllers\Api\V1;
 
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserRegisterRequest;
 use App\Models\Member;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -33,38 +35,28 @@ class AuthController extends Controller
      * @return \Illuminate\Http\JsonResponse
      * @author   Bob<bob@bobcoder.cc>
      */
-    public function register(Request $request)
+    public function register(UserRegisterRequest $request)
     {
 
-        $rules = [
-            'name' => ['required'],
-            'phone' => ['required'],
-            'password' => ['required', 'min:6', 'max:16'],
-        ];
-
-        $payload = $request->only('name', 'phone', 'password');
-        $validator = Validator::make($payload, $rules);
-
-        // 验证格式
-        if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()]);
-        }
-
+        $payload = $request->only('name', 'email', 'password');
         // 创建用户
         $result = Member::create([
             'name' => $payload['name'],
-            'phone' => $payload['phone'],
+            'email' => $payload['email'],
             'password' => bcrypt($payload['password']),
             'uuid' => \Faker\Provider\Uuid::uuid(),
         ]);
 
+        $token = $this->guard()->attempt($request->only('email', 'password'));
+
         if ($result) {
-            return response()->json(['success' => '创建用户成功']);
+            return $this->respondWithToken($token);
         } else {
             return response()->json(['error' => '创建用户失败']);
         }
 
     }
+
 
     /**
      * Get a JWT token via given credentials.
@@ -75,7 +67,7 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
-        $credentials = $request->only('phone', 'password');
+        $credentials = $request->only('email', 'password');
 
         if ($token = $this->guard()->attempt($credentials)) {
             return $this->respondWithToken($token);
