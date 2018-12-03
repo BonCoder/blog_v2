@@ -61,7 +61,7 @@ class IndexController extends Controller
         $articles = Article::query()
             ->with('tags')
             ->select('id','title','created_at','content')
-            ->limit(10)
+            ->limit(5)
             ->orderBy('created_at','desc')
             ->get();
 

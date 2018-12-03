@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AppendArticleRecommendTable extends Migration
+class AppendCommentCountTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class AppendArticleRecommendTable extends Migration
      */
     public function up()
     {
-        if (! Schema::hasColumn('articles', 'recommend')) {
+        if (! Schema::hasColumn('articles', 'comment_count')) {
             Schema::table('articles', function (Blueprint $table) {
-                $table->integer('recommend')->default(0)->comment('是否推荐 1:是 0:否');
+                $table->integer('comment_count')->default(0)->comment('评论数量');
             });
         }
-        if (! Schema::hasColumn('articles', 'status')) {
+        if (! Schema::hasColumn('articles', 'user_id')) {
             Schema::table('articles', function (Blueprint $table) {
-                $table->integer('status')->default(1)->comment('状态 1:是 0:否');
+                $table->integer('user_id')->default(1)->comment('作者ID');
             });
         }
     }
@@ -33,8 +33,8 @@ class AppendArticleRecommendTable extends Migration
     public function down()
     {
         Schema::table('articles', function (Blueprint $table) {
-            $table->dropColumn('recommend');
-            $table->dropColumn('status');
+            $table->dropColumn('comment_count');
+            $table->dropColumn('user_id');
         });
     }
 }

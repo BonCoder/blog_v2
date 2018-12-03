@@ -119,7 +119,7 @@
 
                         <dd>
 
-                            <div class="layui-status-img"><a href="javascript:;"><img src="../../layuiadmin/style/res/logo.png"></a></div>
+                            <div class="layui-status-img"><a href="javascript:;">c</a></div>
 
                             <div>
 

@@ -89,7 +89,7 @@
         <div class="layui-side layui-side-menu">
             <div class="layui-side-scroll">
                 <div class="layui-logo" lay-href="{{route('admin.index')}}">
-                    <span>Bob'blog</span>
+                   <img src="/images/logo_1.png" style="width: 140px;">
                 </div>
 
                 <ul class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu" lay-filter="layadmin-system-side-menu">
@@ -99,15 +99,15 @@
                             <cite>主页</cite>
                         </a>
                         <dl class="layui-nav-child">
-<!--                            <dd data-name="console" class="layui-this">-->
-<!--                                <a lay-href="{{route('admin.index')}}">控制台</a>-->
-<!--                            </dd>-->
+                            <dd data-name="console" class="layui-this">
+                                <a lay-href="{{route('admin.index')}}">控制台</a>
+                            </dd>
 <!--                            <dd data-name="console">-->
 <!--                                <a lay-href="{{route('admin.index1')}}">主页一</a>-->
 <!--                            </dd>-->
-                            <dd data-name="console">
-                                <a lay-href="{{route('admin.index2')}}">控制台</a>
-                            </dd>
+<!--                            <dd data-name="console">-->
+<!--                                <a lay-href="{{route('admin.index2')}}">控制台</a>-->
+<!--                            </dd>-->
                         </dl>
                     </li>
                     @foreach($menus as $menu)

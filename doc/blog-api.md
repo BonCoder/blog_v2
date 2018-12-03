@@ -464,6 +464,127 @@
 | category.name  | string      | yes       |  分类名称  |
 
 
+## 获取文章评论列表
+
+### 请求地址
+
+ &hearts; `get` : `api/v1/article/{article}/comments`
+
+### 请求参数
+| 名称     | 类型     | 描述     | 
+|----------|:--------:|:--------:|
+|   article      | int      | 文章ID    |
+
+### 返回体
+
+```json5
+[
+    {
+        "id": 4,
+        "user_id": 4,
+        "target_user": 1,
+        "reply_user": 6,
+        "commentable_type": "App\\Models\\Article",
+        "commentable_id": 1,
+        "content": "我觉得你说的很有道理22222",
+        "created_at": "2018-12-03 14:44:57",
+        "updated_at": "2018-12-03 14:44:57",
+        "user": {
+            "id": 4,
+            "phone": null,
+            "name": "Bob2",
+            "avatar": null,
+            "uuid": "41fc277c-5d6b-3670-8f3e-e510cc882bf2",
+            "deleted_at": null,
+            "created_at": "2018-11-30 15:07:15",
+            "updated_at": "2018-11-30 15:07:15",
+            "email": "1231@qq.com"
+        },
+        "reply": {
+            "id": 6,
+            "phone": null,
+            "name": "Bob5",
+            "avatar": null,
+            "uuid": "2e24dc6a-a259-325c-a19a-32bb48bb3fc0",
+            "deleted_at": null,
+            "created_at": "2018-11-30 15:11:55",
+            "updated_at": "2018-11-30 15:11:55",
+            "email": "1233@qq.com"
+        }
+    }
+]
+```
+### 返回字段
+
+| name     | type     | must     | description |
+|----------|:--------:|:--------:|:--------:|
+| id    | int      | yes       |  评论ID  |
+| user_id    | int      | yes       |  评论者ID  |
+| target_user    | string      | yes       |  作者ID  |
+| reply_user    | string      | yes       |  被回复者ID  |
+| commentable_id    | text      | yes       |  文章ID  |
+| content    | string      | yes       |  内容  |
+| created_at    | string      | yes       |  创建时间  |
+| user    | array      | yes       |  评论者  |
+| user.id    | int      | yes       |  评论者ID  |
+| user.name    | string      | yes       |  昵称  |
+| user.avatar    | string      | yes       |  头像  |
+| user.email    | string      | yes       |  邮箱  |
+| reply    | array      | yes       |  被回复者  |
+| reply.id    | int      | yes       |  被回复者ID  |
+| reply.name    | string      | yes       |  昵称  |
+| reply.avatar    | string      | yes       |  头像  |
+| reply.email    | string      | yes       |  邮箱  |
+
+## 文章评论
+
+### 请求地址
+
+ &hearts; `post` : `api/v1/article/{article}/comments`
+
+### 请求参数
+| 名称     | 类型     | 描述     | 
+|----------|:--------:|:--------:|
+|   article      | int      | 文章ID    |
+|   content      | text      | 评论内容    |
+|   reply_user      |  int      | 被评论者ID (不传默认为0) |
+|   parent_id      |  int      | 上级评论ID (不传默认为0) |
+
+### 返回体
+
+```json5
+{
+    "code": 1,
+    "message": "评论成功",
+    "comment": {
+        "user_id": 3,
+        "reply_user": 0,
+        "target_user": 1,
+        "parent_id": 0,
+        "content": "我觉得你说的很有道理-4",
+        "commentable_type": "App\\Models\\Article",
+        "commentable_id": 1,
+        "updated_at": "2018-12-03 16:32:14",
+        "created_at": "2018-12-03 16:32:14",
+        "id": 6
+    }
+}
+```
+### 返回字段
+
+| name     | type     | must     | description |
+|----------|:--------:|:--------:|:--------:|
+| code    | int      | yes       |  状态码  |
+| message    | string      | yes       |  返回信息  |
+| comment    | string      | yes       |  返回信息  |
+| comment.id    | int      | yes       |  返回信息  |
+| comment.user_id    | int      | yes       |  评论者ID  |
+| comment.reply_user    | int      | yes       |  被评论者ID  |
+| comment.target_user    | int      | yes       |  作者ID |
+| comment.parent_id    | int      | yes       |  父级ID  |
+| comment.content    | string      | yes       |  内容  |
+| comment.commentable_id    | int      | yes       |  文章ID  |
+
 ## 站点基本信息
 
 ### 请求地址

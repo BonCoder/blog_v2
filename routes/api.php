@@ -32,15 +32,22 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api\V1','prefix' => 'a
 
     //站点基本信息
     $api->get('site','IndexController@site');
-    //文章列表
-    $api->get('article','IndexController@index');
     //获取广告位
     $api->get('adverts','IndexController@adverts');
     //获取所有标签
     $api->get('tag','IndexController@tag');
     //获取所有友链
     $api->get('links','IndexController@links');
-    //获取文章详情
-    $api->get('article/{article}','ArticleController@detail')->where(['article' => '[0-9]+']);
+
+    $api->group(['prefix' => 'article'],function ($api){
+        //文章列表
+        $api->get('/','IndexController@index');
+        //获取文章详情
+        $api->get('/{article}','ArticleController@detail')->where(['article' => '[0-9]+']);
+        //获取文章评论列表
+        $api->get('/{article}/comments','CommentsController@index')->where(['article' => '[0-9]+']);
+        //文章评论
+        $api->post('/{article}/comments','CommentsController@store')->middleware('refresh');
+    });
 
 });
