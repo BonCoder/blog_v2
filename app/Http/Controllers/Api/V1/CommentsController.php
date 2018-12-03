@@ -40,7 +40,7 @@ class CommentsController extends Controller
      */
     public function index(Request $request, Article $article)
     {
-        $limit = $request->input('limit', 10);
+        $limit = $request->input('limit', 15);
         $offset = $request->input('offset', 0);
         $article = $article->first();
 
