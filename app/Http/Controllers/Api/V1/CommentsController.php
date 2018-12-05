@@ -66,7 +66,7 @@ class CommentsController extends Controller
         $user = $request->user();
         $article = $article->first();
         //判断是否存在缓存
-        $key = $article->id . 'articles_comment' . $user->id;
+        $key = $article->id . 'article_comment' . $user->id;
         if ($this->cache->get($key)) {
             return response()->json(['message' => '请勿频繁评论'], 422);
         }
@@ -75,9 +75,6 @@ class CommentsController extends Controller
         $parent_id = (int) $request->input('parent_id', 0);
         if (! $content) {
             return response()->json(['message' => '请输入评论内容'], 422);
-        }
-        if (!preg_match('/^(?![0-9]+$)(?![a-zA-Z]+$)/',$content) || mb_strlen($content) < 2){
-            return response()->json(['message' => '优质评论，说点有建设性的~'], 422);
         }
         $comment->user_id = $user->id;
         $comment->reply_user = $replyUser;

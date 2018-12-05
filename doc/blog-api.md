@@ -1,5 +1,7 @@
 # Blog_V2 API 文档
+
 [TOC]
+
 ## 用户
 
 ### 用户注册
@@ -32,6 +34,8 @@
 | category_id    | string      | yes       |  token类型  |
 | expires_in    | string      | yes       |  过期时间  |
 
+------------
+
 ### 用户登陆
 
 #### 请求地址
@@ -61,6 +65,7 @@
 | category_id    | string      | yes       |  token类型  |
 | expires_in    | string      | yes       |  过期时间  |
 
+------------
 
 ### 个人信息
 
@@ -98,6 +103,8 @@
 | uuid    | string      | yes       |  UUID  |
 | email    | string      | yes       |  邮箱  |
 
+------------
+
 ### 获取新token
 
 #### 请求地址
@@ -125,14 +132,17 @@
 | category_id    | string      | yes       |  token类型  |
 | expires_in    | string      | yes       |  过期时间  |
 
+------------
 
-## 文章列表
+## 文章
 
-### 请求地址
+### 文章列表
+
+#### 请求地址
 
  &hearts; `get` : `api/v1/article`
 
-### 请求参数
+#### 请求参数
 | 名称 | 类型 | 描述 |
 |:----:|:----:|------|
 | limit    | int    |  每页个数 默认为10条  |
@@ -141,7 +151,7 @@
 | tag_id | int | 标签ID |
 | title | string | 标题 |
 
-### 返回体
+#### 返回体
 
 ```json5
 [
@@ -215,7 +225,7 @@
     }
 ]
 ```
-### 返回字段
+#### 返回字段
 
 | name     | type     | must     | description |
 |----------|:--------:|:--------:|:--------:|
@@ -235,8 +245,218 @@
 | category.id    | int      | yes       |  分类ID  |
 | category.name  | string      | yes       |  分类名称  |
 
+------------
 
-## 获取广告位
+### 文章详情
+
+#### 请求地址
+
+ &hearts; `get` : `api/v1/article/{article}`
+
+#### 请求参数
+| 名称     | 类型     | 描述     | 
+|----------|:--------:|:--------:|
+
+#### 返回体
+
+```json5
+[
+    {
+        "id": 1,
+        "category_id": 5,
+        "title": "【Java】 JDBC连接MYSQL数据库教程",
+        "keywords": "JDBC,MYSQL",
+        "content": "测试数据",
+        "click": 364,
+        "thumb": "http://file.bobcoder.cc/2018-11-21_1542791857_5bf522b191a9b.png",
+        "created_at": "2017-07-04 11:23:46",
+        "updated_at": "2018-11-29 15:31:19",
+        "recommend": 0,
+        "status": 1,
+        "tags": [
+            {
+                "id": 20,
+                "name": "mysql",
+                "sort": 0,
+                "created_at": "2018-11-26 16:07:26",
+                "updated_at": "2018-11-26 16:07:26",
+                "pivot": {
+                    "article_id": 1,
+                    "tag_id": 20
+                }
+            },
+            {
+                "id": 22,
+                "name": "java",
+                "sort": 0,
+                "created_at": "2018-11-21 16:59:29",
+                "updated_at": "2018-11-21 16:59:29",
+                "pivot": {
+                    "article_id": 1,
+                    "tag_id": 22
+                }
+            }
+        ],
+        "category": {
+            "id": 5,
+            "name": "Java",
+            "parent_id": 0,
+            "sort": 0,
+            "created_at": "2018-11-21 15:57:03",
+            "updated_at": "2018-11-21 15:57:03"
+        }
+    }
+]
+```
+#### 返回字段
+
+| name     | type     | must     | description |
+|----------|:--------:|:--------:|:--------:|
+| id    | int      | yes       |  未读条数  |
+| category_id    | int      | yes       |  分类ID  |
+| title    | string      | yes       |  文章标题  |
+| keywords    | string      | yes       |  关键字  |
+| content    | text      | yes       |  内容  |
+| thumb    | string      | yes       |  缩略图  |
+| created_at    | string      | yes       |  创建时间  |
+| recommend    | int      | yes       |  是否推荐 1:是 0:否 |
+| status    | int      | yes       |  状态 1:是 2:否|
+| tags    | array      | yes       |  标签  |
+| tags.id    | int      | yes       |  标签ID  |
+| tags.name    | string      | yes       |  标签名称  |
+| category   | array      | yes       |  分类  |
+| category.id    | int      | yes       |  分类ID  |
+| category.name  | string      | yes       |  分类名称  |
+
+------------
+
+### 文章评论列表
+
+### 请求地址
+
+ &hearts; `get` : `api/v1/article/{article}/comments`
+
+#### 请求参数
+| 名称     | 类型     | 描述     | 
+|----------|:--------:|:--------:|
+|   limit      | int      | 请求数据条数  默认15条    |
+|   offset     | int      | 用来翻页的记录id  默认为0  |
+
+#### 返回体
+
+```json5
+[
+    {
+        "id": 4,
+        "user_id": 4,
+        "target_user": 1,
+        "reply_user": 6,
+        "commentable_type": "App\\Models\\Article",
+        "commentable_id": 1,
+        "content": "我觉得你说的很有道理22222",
+        "created_at": "2018-12-03 14:44:57",
+        "updated_at": "2018-12-03 14:44:57",
+        "user": {
+            "id": 4,
+            "phone": null,
+            "name": "Bob2",
+            "avatar": null,
+            "uuid": "41fc277c-5d6b-3670-8f3e-e510cc882bf2",
+            "deleted_at": null,
+            "created_at": "2018-11-30 15:07:15",
+            "updated_at": "2018-11-30 15:07:15",
+            "email": "1231@qq.com"
+        },
+        "reply": {
+            "id": 6,
+            "phone": null,
+            "name": "Bob5",
+            "avatar": null,
+            "uuid": "2e24dc6a-a259-325c-a19a-32bb48bb3fc0",
+            "deleted_at": null,
+            "created_at": "2018-11-30 15:11:55",
+            "updated_at": "2018-11-30 15:11:55",
+            "email": "1233@qq.com"
+        }
+    }
+]
+```
+#### 返回字段
+
+| name     | type     | must     | description |
+|----------|:--------:|:--------:|:--------:|
+| id    | int      | yes       |  评论ID  |
+| user_id    | int      | yes       |  评论者ID  |
+| target_user    | string      | yes       |  作者ID  |
+| reply_user    | string      | yes       |  被回复者ID  |
+| commentable_id    | text      | yes       |  文章ID  |
+| content    | string      | yes       |  内容  |
+| created_at    | string      | yes       |  创建时间  |
+| user    | array      | yes       |  评论者  |
+| user.id    | int      | yes       |  评论者ID  |
+| user.name    | string      | yes       |  昵称  |
+| user.avatar    | string      | yes       |  头像  |
+| user.email    | string      | yes       |  邮箱  |
+| reply    | array      | yes       |  被回复者  |
+| reply.id    | int      | yes       |  被回复者ID  |
+| reply.name    | string      | yes       |  昵称  |
+| reply.avatar    | string      | yes       |  头像  |
+| reply.email    | string      | yes       |  邮箱  |
+
+------------
+
+### 文章评论
+
+#### 请求地址
+
+ &hearts; `post` : `api/v1/article/{article}/comments`
+
+#### 请求参数
+| 名称     | 类型     | 描述     | 
+|----------|:--------:|:--------:|
+|   content      | text      | 评论内容    |
+|   reply_user      |  int      | 被评论者ID (不传默认为0) |
+|   parent_id      |  int      | 上级评论ID (不传默认为0) |
+
+#### 返回体
+
+```json5
+{
+    "code": 1,
+    "message": "评论成功",
+    "comment": {
+        "user_id": 3,
+        "reply_user": 0,
+        "target_user": 1,
+        "parent_id": 0,
+        "content": "我觉得你说的很有道理-4",
+        "commentable_type": "App\\Models\\Article",
+        "commentable_id": 1,
+        "updated_at": "2018-12-03 16:32:14",
+        "created_at": "2018-12-03 16:32:14",
+        "id": 6
+    }
+}
+```
+#### 返回字段
+
+| name     | type     | must     | description |
+|----------|:--------:|:--------:|:--------:|
+| code    | int      | yes       |  状态码  |
+| message    | string      | yes       |  返回信息  |
+| comment    | string      | yes       |  返回信息  |
+| comment.id    | int      | yes       |  返回信息  |
+| comment.user_id    | int      | yes       |  评论者ID  |
+| comment.reply_user    | int      | yes       |  被评论者ID  |
+| comment.target_user    | int      | yes       |  作者ID |
+| comment.parent_id    | int      | yes       |  父级ID  |
+| comment.content    | string      | yes       |  内容  |
+| comment.commentable_id    | int      | yes       |  文章ID  |
+
+------------
+
+
+## 广告位
 
 ### 请求地址
 
@@ -298,8 +518,9 @@
 | position_id    | int      | yes       |  位置ID  |
 | description    | text      | yes       |  广告描述  |
 
+------------
 
-## 获取所有标签
+## 标签
 
 ### 请求地址
 
@@ -343,8 +564,9 @@
 | name    | string      | yes       |  标签名称  |
 | sort    | int      | yes       |  排序ID  |
 
+------------
 
-## 获取所有友链
+## 友情链接
 
 ### 请求地址
 
@@ -380,209 +602,7 @@
 | status    | int      | yes       |  状态 1:开启 0:关闭|
 | sort    | int      | yes       |  排序ID  |
 
-
-## 文章详情
-
-### 请求地址
-
- &hearts; `get` : `api/v1/article/{article}`
-
-### 请求参数
-| 名称     | 类型     | 描述     | 
-|----------|:--------:|:--------:|
-
-### 返回体
-
-```json5
-[
-    {
-        "id": 1,
-        "category_id": 5,
-        "title": "【Java】 JDBC连接MYSQL数据库教程",
-        "keywords": "JDBC,MYSQL",
-        "content": "测试数据",
-        "click": 364,
-        "thumb": "http://file.bobcoder.cc/2018-11-21_1542791857_5bf522b191a9b.png",
-        "created_at": "2017-07-04 11:23:46",
-        "updated_at": "2018-11-29 15:31:19",
-        "recommend": 0,
-        "status": 1,
-        "tags": [
-            {
-                "id": 20,
-                "name": "mysql",
-                "sort": 0,
-                "created_at": "2018-11-26 16:07:26",
-                "updated_at": "2018-11-26 16:07:26",
-                "pivot": {
-                    "article_id": 1,
-                    "tag_id": 20
-                }
-            },
-            {
-                "id": 22,
-                "name": "java",
-                "sort": 0,
-                "created_at": "2018-11-21 16:59:29",
-                "updated_at": "2018-11-21 16:59:29",
-                "pivot": {
-                    "article_id": 1,
-                    "tag_id": 22
-                }
-            }
-        ],
-        "category": {
-            "id": 5,
-            "name": "Java",
-            "parent_id": 0,
-            "sort": 0,
-            "created_at": "2018-11-21 15:57:03",
-            "updated_at": "2018-11-21 15:57:03"
-        }
-    }
-]
-```
-### 返回字段
-
-| name     | type     | must     | description |
-|----------|:--------:|:--------:|:--------:|
-| id    | int      | yes       |  未读条数  |
-| category_id    | int      | yes       |  分类ID  |
-| title    | string      | yes       |  文章标题  |
-| keywords    | string      | yes       |  关键字  |
-| content    | text      | yes       |  内容  |
-| thumb    | string      | yes       |  缩略图  |
-| created_at    | string      | yes       |  创建时间  |
-| recommend    | int      | yes       |  是否推荐 1:是 0:否 |
-| status    | int      | yes       |  状态 1:是 2:否|
-| tags    | array      | yes       |  标签  |
-| tags.id    | int      | yes       |  标签ID  |
-| tags.name    | string      | yes       |  标签名称  |
-| category   | array      | yes       |  分类  |
-| category.id    | int      | yes       |  分类ID  |
-| category.name  | string      | yes       |  分类名称  |
-
-
-## 获取文章评论列表
-
-### 请求地址
-
- &hearts; `get` : `api/v1/article/{article}/comments`
-
-### 请求参数
-| 名称     | 类型     | 描述     | 
-|----------|:--------:|:--------:|
-|   limit      | int      | 请求数据条数  默认15条    |
-|   offset     | int      | 用来翻页的记录id  默认为0  |
-
-### 返回体
-
-```json5
-[
-    {
-        "id": 4,
-        "user_id": 4,
-        "target_user": 1,
-        "reply_user": 6,
-        "commentable_type": "App\\Models\\Article",
-        "commentable_id": 1,
-        "content": "我觉得你说的很有道理22222",
-        "created_at": "2018-12-03 14:44:57",
-        "updated_at": "2018-12-03 14:44:57",
-        "user": {
-            "id": 4,
-            "phone": null,
-            "name": "Bob2",
-            "avatar": null,
-            "uuid": "41fc277c-5d6b-3670-8f3e-e510cc882bf2",
-            "deleted_at": null,
-            "created_at": "2018-11-30 15:07:15",
-            "updated_at": "2018-11-30 15:07:15",
-            "email": "1231@qq.com"
-        },
-        "reply": {
-            "id": 6,
-            "phone": null,
-            "name": "Bob5",
-            "avatar": null,
-            "uuid": "2e24dc6a-a259-325c-a19a-32bb48bb3fc0",
-            "deleted_at": null,
-            "created_at": "2018-11-30 15:11:55",
-            "updated_at": "2018-11-30 15:11:55",
-            "email": "1233@qq.com"
-        }
-    }
-]
-```
-### 返回字段
-
-| name     | type     | must     | description |
-|----------|:--------:|:--------:|:--------:|
-| id    | int      | yes       |  评论ID  |
-| user_id    | int      | yes       |  评论者ID  |
-| target_user    | string      | yes       |  作者ID  |
-| reply_user    | string      | yes       |  被回复者ID  |
-| commentable_id    | text      | yes       |  文章ID  |
-| content    | string      | yes       |  内容  |
-| created_at    | string      | yes       |  创建时间  |
-| user    | array      | yes       |  评论者  |
-| user.id    | int      | yes       |  评论者ID  |
-| user.name    | string      | yes       |  昵称  |
-| user.avatar    | string      | yes       |  头像  |
-| user.email    | string      | yes       |  邮箱  |
-| reply    | array      | yes       |  被回复者  |
-| reply.id    | int      | yes       |  被回复者ID  |
-| reply.name    | string      | yes       |  昵称  |
-| reply.avatar    | string      | yes       |  头像  |
-| reply.email    | string      | yes       |  邮箱  |
-
-## 文章评论
-
-### 请求地址
-
- &hearts; `post` : `api/v1/article/{article}/comments`
-
-### 请求参数
-| 名称     | 类型     | 描述     | 
-|----------|:--------:|:--------:|
-|   content      | text      | 评论内容    |
-|   reply_user      |  int      | 被评论者ID (不传默认为0) |
-|   parent_id      |  int      | 上级评论ID (不传默认为0) |
-
-### 返回体
-
-```json5
-{
-    "code": 1,
-    "message": "评论成功",
-    "comment": {
-        "user_id": 3,
-        "reply_user": 0,
-        "target_user": 1,
-        "parent_id": 0,
-        "content": "我觉得你说的很有道理-4",
-        "commentable_type": "App\\Models\\Article",
-        "commentable_id": 1,
-        "updated_at": "2018-12-03 16:32:14",
-        "created_at": "2018-12-03 16:32:14",
-        "id": 6
-    }
-}
-```
-### 返回字段
-
-| name     | type     | must     | description |
-|----------|:--------:|:--------:|:--------:|
-| code    | int      | yes       |  状态码  |
-| message    | string      | yes       |  返回信息  |
-| comment    | string      | yes       |  返回信息  |
-| comment.id    | int      | yes       |  返回信息  |
-| comment.user_id    | int      | yes       |  评论者ID  |
-| comment.reply_user    | int      | yes       |  被评论者ID  |
-| comment.target_user    | int      | yes       |  作者ID |
-| comment.parent_id    | int      | yes       |  父级ID  |
-| comment.content    | string      | yes       |  内容  |
-| comment.commentable_id    | int      | yes       |  文章ID  |
+------------
 
 ## 站点基本信息
 
@@ -616,3 +636,5 @@
 | copyright    | string      | yes       |  版权  |
 | city    | string      | yes       |  城市  |
 | phone    | string      | yes       |  手机号  |
+
+------------
