@@ -66,7 +66,7 @@
 <link rel="stylesheet" href="http://yandex.st/highlightjs/6.2/styles/googlecode.min.css">
 
 <div id="test-editormd-view" class="admin-editormd">
-    <textarea>{{ $doc }}</textarea>
+    <textarea>{{ $docs }}</textarea>
 </div>
 
 <!--如果在页面其他位置引入过jquery，此处引用可以删除-->
