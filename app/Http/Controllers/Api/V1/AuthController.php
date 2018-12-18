@@ -13,6 +13,7 @@ use App\Http\Requests\UserRegisterRequest;
 use App\Models\Member;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\Facades\JWTAuth;
@@ -31,7 +32,7 @@ class AuthController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param UserRegisterRequest $request
      * @return \Illuminate\Http\JsonResponse
      * @author   Bob<bob@bobcoder.cc>
      */
@@ -56,7 +57,6 @@ class AuthController extends Controller
         }
 
     }
-
 
     /**
      * Get a JWT token via given credentials.

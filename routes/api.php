@@ -30,6 +30,8 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api\V1','prefix' => 'a
         return view('home.docs.index',['docs'=>$docs]);
     });
 
+    //获取邮箱验证
+    $api->get('tomail','VerifyCodeController@sendFromRequest');
     //站点基本信息
     $api->get('site','IndexController@site');
     //获取广告位
