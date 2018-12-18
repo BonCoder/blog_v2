@@ -65,7 +65,7 @@ class VerifyCodeController extends Controller
      */
     protected function send(string $account, string $channel = '', array $data = [])
     {
-        $this->validateSent($account,$channel);
+//        $this->validateSent($account,$channel);
 
         $data['account'] = $account;
         $data['channel'] = $channel;
