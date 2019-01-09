@@ -69,6 +69,13 @@
 </div>
 
 <div class="layui-form-item">
+    <label for="" class="layui-form-label">转载地址</label>
+    <div class="layui-input-block">
+        <input class="layui-input" name="link" placeholder="（选填）" value="{{ $article->source->link??'' }}">
+    </div>
+</div>
+
+<div class="layui-form-item">
     <label for="" class="layui-form-label">内容</label>
     <div id="test-editormd">
         <textarea name="content" style="display:none;">{!! $article->content??old('content') !!}</textarea>
@@ -76,6 +83,8 @@
 </div>
 
 @include('markdown::encode',['editors'=>['test-editormd']])
+
+
 
 <div class="layui-form-item">
     <div class="layui-input-block">

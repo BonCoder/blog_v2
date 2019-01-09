@@ -13,11 +13,12 @@ use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
-    public function detail(Article $article)
+    public function detail(Request $request, Article $article)
     {
-        $data = $article->with(['tags','category'])->first();
-        $article->increment('click',1);
+        $article->load('source');
 
-        return response()->json($data, 200);
+        $article->increment('click', rand(2,5));
+
+        return response()->json($article, 200);
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\ArticleRequest;
 use App\Models\Article;
 use App\Models\Category;
+use App\Models\Source;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -82,9 +83,15 @@ class ArticleController extends Controller
     {
         $data = $request->only(['category_id','title','keywords','content','thumb','click']);
         $article = Article::create($data);
-        if ($article && !empty($request->get('tags')) ){
-            $article->tags()->sync($request->get('tags'));
+
+        if ($tags = $request->get('tags')){
+            $article->tags()->sync($tags);
         }
+
+        if($link = $request->get('link')){
+            $article->source()->create(['link' => $link]);
+        }
+
         return redirect(route('admin.article'))->with(['status'=>'添加成功']);
     }
 
@@ -109,7 +116,7 @@ class ArticleController extends Controller
      */
     public function edit($id)
     {
-        $article = Article::with('tags')->findOrFail($id);
+        $article = Article::with(['tags','source'])->findOrFail($id);
         if (!$article){
             return redirect(route('admin.article'))->withErrors(['status'=>'文章不存在']);
         }
@@ -120,8 +127,8 @@ class ArticleController extends Controller
         foreach ($tags as $tag){
             $tag->checked = $article->tags->contains($tag) ? 'checked' : '';
         }
-        return view('admin.article.edit',compact('article','categorys','tags'));
 
+        return view('admin.article.edit',compact('article','categorys','tags'));
     }
 
     /**
@@ -138,8 +145,13 @@ class ArticleController extends Controller
         $data = $request->only(['category_id','title','keywords','content','thumb','click']);
         if ($article->update($data)){
             $article->tags()->sync($request->get('tags',[]));
+            if($link = $request->get('link')){
+                $article->source()->updateOrCreate(['article_id' => $id], ['link' => $link]);
+            }
+
             return redirect(route('admin.article'))->with(['status'=>'更新成功']);
         }
+
         return redirect(route('admin.article'))->withErrors(['status'=>'系统错误']);
     }
 

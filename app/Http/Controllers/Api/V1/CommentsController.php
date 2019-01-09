@@ -42,7 +42,6 @@ class CommentsController extends Controller
     {
         $limit = $request->input('limit', 15);
         $offset = $request->input('offset', 0);
-        $article = $article->first();
 
         $comments = $article->comments()
             ->with(['user','reply'])

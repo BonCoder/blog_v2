@@ -12,7 +12,12 @@
 */
 
 $api = app('Dingo\Api\Routing\Router');
-$api->version('v1', ['namespace' => 'App\Http\Controllers\Api\V1','prefix' => 'api/v1','middleware'=>'entrance'], function ($api) {
+
+$api->version('v1', [
+    'namespace' => 'App\Http\Controllers\Api\V1',
+    'prefix' => 'api/v1',
+    'middleware'=>['entrance','bindings']
+], function ($api) {
     $api->post('register', 'AuthController@register');
     $api->post('login', 'AuthController@login');
     $api->post('logout', 'AuthController@logout');
@@ -45,7 +50,7 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api\V1','prefix' => 'a
         //文章列表
         $api->get('/','IndexController@index');
         //获取文章详情
-        $api->get('/{article}','ArticleController@detail')->where(['article' => '[0-9]+']);
+        $api->get('/{article}','ArticleController@detail');
         //获取文章评论列表
         $api->get('/{article}/comments','CommentsController@index')->where(['article' => '[0-9]+']);
         //文章评论
