@@ -165,6 +165,11 @@ class ArticleController extends Controller
         return response()->json(['code'=>0,'msg'=>'删除成功']);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @author   Bob<bob@bobcoder.cc>
+     */
     public function status(Request $request)
     {
         $id = (int)$request->input('id');

@@ -149,6 +149,7 @@
                     });
                 });
 
+
                 form.on('switch(recommend)', function(data){
                     var index = layer.msg('修改中，请稍候',{icon: 16,time:false,shade:0.5});
                     $.ajax({
@@ -168,7 +169,6 @@
                         }
                     });
                 });
-
                 @can('zixun.article.edit')
                 //监听是否显示
                 form.on('switch(isShow)', function(obj){
