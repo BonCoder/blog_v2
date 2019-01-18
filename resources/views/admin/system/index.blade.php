@@ -37,7 +37,7 @@
                             </td>
 
                             <td class="text-center">
-                                <a class="layui-btn layui-btn-sm" href="{{route('admin.file.index')}}?dir={{$dir}}&filedir={{$vo['filename']}}">
+                                <a class="layui-btn layui-btn-xs layui-btn-normal" href="{{route('admin.file.index')}}?dir={{$dir}}&filedir={{$vo['filename']}}">
                                     <i class="layui-icon layui-icon-set-fill"></i>
                                     打开
                                 </a>
@@ -58,9 +58,9 @@
                             </td>
 
                             <td class="text-center">
-                                <button class="layui-btn layui-btn-sm" type="button"
+                                <button class="layui-btn layui-btn-xs layui-btn-primary" type="button"
                                         onclick="openfile('{{$vo['filename']}}','{{route('admin.file.open')}}','{{$dir}}/{{$vo['filename']}}')">
-                                    <i class="layui-icon layui-icon-set-fill"></i>
+                                    <i class="layui-icon layui-icon-edit"></i>
                                     编辑
                                 </button>
                                 <!--                                <button class="btn btn-info btn-xs" type="button"  onclick="$eb.createModalFrame('{$vo.filename}','{:Url('openfile')}?file={$vo.filename}&dir={$dir}',{w:1260,h:600})"><i class="fa fa-paste"></i> 重命名</button>-->
