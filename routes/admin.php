@@ -227,3 +227,12 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
         Route::delete('visit/del', 'VisitLogController@del')->name('admin.visit.del');
     });
 });
+
+//系统维护
+Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['auth:web', 'permission:maintain.manage']], function () {
+    //文件管理
+    Route::group(['middleware' => 'permission:maintain.file'], function () {
+        Route::get('system/data', 'SystemController@index')->name('admin.file.index');
+        Route::get('system/openfile', 'SystemController@openfile')->name('admin.file.open');
+    });
+});
