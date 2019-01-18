@@ -11,6 +11,7 @@
     <script src="/static/admin/plug/codemirror/mode/sql/sql.js"></script>
     <script src="/static/admin/plug/codemirror/mode/htmlmixed/htmlmixed.js"></script>
     <script src="/static/admin/plug/codemirror/mode/xml/xml.js"></script>
+    <script src="/static/admin/plug/codemirror/mode/markdown/markdown.js"></script>
     <script src="/static/admin/plug/codemirror/jquery-1.4.1.min.js"></script>
     <title></title>
     <style type="text/css">
@@ -39,10 +40,10 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="btn-group p-xxs">
-            <button type="button" class="btn btn-sm btn-white" id="savefile"><i class="fa fa-save"></i>保存</button>
-            <button type="button" class="btn btn-sm btn-white" id="undo"><i class="fa fa-undo"></i>撤销</button>
-            <button type="button" class="btn btn-sm btn-white" id="redo"><i class="fa fa-rotate-right"></i>回退</button>
-            <button type="button" class="btn btn-sm btn-white" id="refresh"><i class="fa fa-refresh"></i>刷新</button>
+<!--            <button type="button" class="btn btn-sm btn-white" id="savefile"><i class="fa fa-save"></i>保存</button>-->
+<!--            <button type="button" class="btn btn-sm btn-white" id="undo"><i class="fa fa-undo"></i>撤销</button>-->
+<!--            <button type="button" class="btn btn-sm btn-white" id="redo"><i class="fa fa-rotate-right"></i>回退</button>-->
+<!--            <button type="button" class="btn btn-sm btn-white" id="refresh"><i class="fa fa-refresh"></i>刷新</button>-->
 <!--                <button type="button" class="btn btn-sm btn-white" id="replaceRange"><i class="fa fa-exchange"></i>刷新</button>-->
         </div>
 

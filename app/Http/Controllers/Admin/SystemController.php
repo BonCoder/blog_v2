@@ -48,7 +48,7 @@ class SystemController extends Controller
     {
         $file = $request->input('file');
 //        if(empty($file)) return Json::fail('出现错误');
-        $filepath  = '.'.DIRECTORY_SEPARATOR.$file;
+        $filepath  = realpath('..').'.'.DIRECTORY_SEPARATOR.$file;
 
         $content = htmlspecialchars(FileService::read_file($filepath));//防止页面内嵌textarea标签
         $ext = FileService::get_ext($filepath);
@@ -57,7 +57,11 @@ class SystemController extends Controller
             ,'php'=>'text/x-php'
             ,'html'=>'text/html'
             ,'sql'=>'text/x-mysql'
-            ,'css'=>'text/x-scss'];
+            ,'css'=>'text/x-scss'
+            ,'xml'=>'text/xml'
+            ,'markdown'=>'text/html'
+        ];
+
         $mode = empty($extarray[$ext])?'':$extarray[$ext];
 
         return view('admin.system.openfile',compact('content','mode','filepath'));
