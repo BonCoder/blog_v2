@@ -12,7 +12,7 @@
     <script src="/static/admin/plug/codemirror/mode/htmlmixed/htmlmixed.js"></script>
     <script src="/static/admin/plug/codemirror/mode/xml/xml.js"></script>
     <script src="/static/admin/plug/codemirror/mode/markdown/markdown.js"></script>
-    <script src="/static/admin/plug/codemirror/jquery-1.4.1.min.js"></script>
+    <script src="/js/jquery.min.js"></script>
     <title></title>
     <style type="text/css">
         .lineblock { display: inline-block; margin: 1px; height: 5px; }

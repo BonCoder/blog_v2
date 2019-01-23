@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Services\FileService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class SystemController extends Controller
 {
@@ -52,6 +53,7 @@ class SystemController extends Controller
 
         $content = htmlspecialchars(FileService::read_file($filepath));//防止页面内嵌textarea标签
         $ext = FileService::get_ext($filepath);
+
         $extarray = [
             'js'=>'text/javascript'
             ,'php'=>'text/x-php'
@@ -60,6 +62,7 @@ class SystemController extends Controller
             ,'css'=>'text/x-scss'
             ,'xml'=>'text/xml'
             ,'markdown'=>'text/html'
+            ,'log'=>'sql'
         ];
 
         $mode = $extarray[$ext]?$extarray[$ext]:'';
@@ -86,5 +89,35 @@ class SystemController extends Controller
             return request()->json()->fail('出现错误');
         }
 
+    }
+
+    /**
+     * @param Request $request
+     * @author   Bob<bob@bobcoder.cc>
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function openSqlLog(Request $request)
+    {
+        $path = storage_path('logs/sql');
+        $list = scandir($path);
+        $fileAll = array();
+        foreach($list as $key=>$v) {
+            if($v !='.' && $v !='..'){
+                if(is_file($path.'/'.$v)){
+                    $fileAll[] = FileService::list_info($path.'/'.$v);
+                }
+            }
+        }
+
+        return view('admin.system.log',compact('fileAll','path'));
+    }
+
+    public function destroy(Request $request)
+    {
+        $filename = $request->input('filename');
+
+        Storage::disk('log')->delete($filename);
+
+        return response()->json(['code'=>1,'msg'=>'删除成功']);
     }
 }

@@ -235,4 +235,8 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
         Route::get('system/data', 'SystemController@index')->name('admin.file.index');
         Route::get('system/openfile', 'SystemController@openfile')->name('admin.file.open');
     });
+    Route::group(['middleware' => 'permission:maintain.log'], function () {
+        Route::get('system/log', 'SystemController@openSqlLog')->name('admin.log.index');
+        Route::delete('system/log/destroy', 'SystemController@destroy')->name('admin.log.destroy');
+    });
 });
