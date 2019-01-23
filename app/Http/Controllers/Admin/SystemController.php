@@ -62,7 +62,7 @@ class SystemController extends Controller
             ,'markdown'=>'text/html'
         ];
 
-        $mode = empty($extarray[$ext])?'':$extarray[$ext];
+        $mode = $extarray[$ext]?$extarray[$ext]:'';
 
         return view('admin.system.openfile',compact('content','mode','filepath'));
     }
@@ -71,7 +71,7 @@ class SystemController extends Controller
     public function savefile(Request $request){
         $comment = $request->input('comment');
         $filepath = $request->input('filepath');
-        if(!empty($comment) && !empty($filepath)){
+        if($comment && $filepath){
             //兼容windows
             $uname=php_uname('s');
             if(strstr($uname,'Windows')!==false)
