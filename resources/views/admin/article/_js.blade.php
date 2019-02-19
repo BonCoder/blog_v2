@@ -38,7 +38,7 @@
 </style>
 <script>
     layui.use(['upload'],function () {
-        var upload = layui.upload
+        var upload = layui.upload,$ = layui.jquery
 
         $.("#uploadPic").click(function () {
             layer.open({
