@@ -37,6 +37,23 @@ Route::group(['namespace'=>'Admin','prefix'=>'admin','middleware'=>'auth:web'],f
     Route::get('area','IndexController@area')->name('admin.area');
 });
 
+//文件库
+Route::group(['namespace'=>'Admin','prefix'=>'admin','middleware'=>'auth:web'],function (){
+    //后台布局
+    Route::get('/file/list', function (){
+        return view('admin.file.index');
+    });
+    //后台首页
+    Route::get('/index','IndexController@index')->name('admin.index');
+    Route::get('/index1','IndexController@index1')->name('admin.index1');
+    Route::get('/index2','IndexController@index2')->name('admin.index2');
+    //图标
+    Route::get('icons','IndexController@icons')->name('admin.icons');
+    //用户分布图
+    Route::get('area','IndexController@area')->name('admin.area');
+});
+
+
 //系统管理
 Route::group(['namespace'=>'Admin','prefix'=>'admin','middleware'=>['auth:web','permission:system.manage']],function (){
     //数据表格接口
