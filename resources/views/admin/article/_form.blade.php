@@ -55,11 +55,11 @@
     <label for="" class="layui-form-label">缩略图</label>
     <div class="layui-input-block">
         <div class="layui-upload">
-            <button type="button" class="layui-btn" id="uploadPic"><i class="layui-icon">&#xe67c;</i>图片上传</button>
+            <button type="button" class="layui-btn" id="uploadPics"><i class="layui-icon">&#xe67c;</i>选则图片</button>
             <div class="layui-upload-list" >
                 <ul id="layui-upload-box" class="layui-clear">
                     @if(isset($article->thumb))
-                        <li><img src="{{ $article->thumb }}" /><p>上传成功</p></li>
+                        <li><img src="{{ $article->thumb }}" /></li>
                     @endif
                 </ul>
                 <input type="hidden" name="thumb" id="thumb" value="{{ $article->thumb??'' }}">
