@@ -17,7 +17,6 @@ window.Vue = require('vue');
 
 // Vue.component('example-component', require('./components/ExampleComponent.vue'));
 
-import Hello from './components/hello.vue'; // 引入Hello 组件
 import App from './App.vue';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';

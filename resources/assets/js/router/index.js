@@ -1,14 +1,17 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+
+//引入模板
+import hello from '../pages/hello.vue';
+
 Vue.use(VueRouter);
 
+//定义路由
+const routes = [
+    { path: '/',component:hello },
+];
+
 export default new VueRouter({
-    saveScrollPosition: true,
-    routes: [
-        {
-            name: 'hello',
-            path: '/hello',
-            component: resolve => void(require(['../components/hello.vue'], resolve))
-        }
-    ]
+    routes,
+    mode: 'hash',
 });

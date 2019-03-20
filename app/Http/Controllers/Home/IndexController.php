@@ -10,7 +10,8 @@ class IndexController extends Controller
 {
     public function index()
     {
-        return '前台主页，暂无内容';
+
+        return view('home.index',['keywords' => $this->keywords]);
     }
 
     public function article()
