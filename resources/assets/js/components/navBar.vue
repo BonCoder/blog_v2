@@ -78,12 +78,12 @@ export default {
   width: 100%;
   height: 60px;
   &-contant {
-    width: 60%;
+    width: 80%;
     height: 100%;
     margin: 0 auto;
     display: flex;
     &-logo {
-      width: 20%;
+      width: 14.5%;
       height: 100%;
     }
     .contantNav {
@@ -95,7 +95,7 @@ export default {
       }
     }
     .right {
-      width: 20%;
+      width: 31.5%;
       font-size: 0.8rem;
       color: #66757f;
       display: flex;

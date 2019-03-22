@@ -2,7 +2,7 @@
   <div id="app">
     <!-- 公共头部组件 -->
 
-    <head />
+    <headerBar />
     <!-- 主页大图 -->
     <div class="banner"></div>
     <navBar />
@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import head from './components/head'
+import headerBar from './components/headerBar'
 import navBar from './components/navBar'
 import contant from './components/contant'
 import personal from './components/personal'
@@ -38,10 +38,13 @@ export default {
     }
   },
   components: {
-    head,
+    headerBar,
     navBar,
     personal,
     contant
+  },
+  mounted () {
+    console.log(this)
   }
 }
 </script>
@@ -95,7 +98,7 @@ a {
     background-size: cover;
   }
   .main {
-    background: #eeeeee;
+    background: #f5f8fa;
     &-contant {
       width: 60%;
       margin: 0 auto;

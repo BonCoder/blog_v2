@@ -20,7 +20,7 @@
 <script>
 import hover from './hover'
 export default {
-  name: "Head",
+  name: "headerBar",
   data () {
     return {
       seach: ""

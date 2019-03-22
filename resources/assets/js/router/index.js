@@ -7,6 +7,6 @@ export default new VueRouter({
   routes: [{
     name: 'header',
     path: '/header',
-    component: resolve => void(require(['../components/head.vue'], resolve))
+    component: resolve => void(require(['../components/headerBar.vue'], resolve))
   }]
 });
