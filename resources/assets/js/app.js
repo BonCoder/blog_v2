@@ -1,4 +1,3 @@
-
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -15,8 +14,6 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-// Vue.component('example-component', require('./components/ExampleComponent.vue'));
-
 import App from './App.vue';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
@@ -25,7 +22,7 @@ Vue.use(ElementUI);
 import router from './router/index.js';
 
 const app = new Vue({
-    el: '#app',
-    router,
-    render:h => h(App)
+  el: '#app',
+  router,
+  render: h => h(App)
 });
