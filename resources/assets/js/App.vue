@@ -31,6 +31,7 @@ import headerBar from './components/headerBar'
 import navBar from './components/navBar'
 import contant from './components/contant'
 import personal from './components/personal'
+import './font/iconfont.css'
 export default {
   data () {
     return {
@@ -53,8 +54,8 @@ export default {
 html,
 body {
   font-family: "PingFang SC";
-  width: 100%;
-  height: 100%;
+  // width: 100%;
+  // height: 100%;
 }
 body,
 div,
@@ -98,6 +99,7 @@ a {
     background-size: cover;
   }
   .main {
+    min-height: 200px;
     background: #f5f8fa;
     &-contant {
       width: 60%;

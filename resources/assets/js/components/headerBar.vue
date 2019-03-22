@@ -1,4 +1,5 @@
 <template>
+  <!-- 头部组件 -->
   <div class="header">
     <div class="contant">
       <a href="http://www.baidu.com">
@@ -12,6 +13,7 @@
         </el-input>
         <el-button type="danger">登录</el-button>
         <el-button type="danger">注册</el-button>
+        <login />
       </div>
     </div>
   </div>
@@ -19,6 +21,7 @@
 
 <script>
 import hover from './hover'
+import login from './login'
 export default {
   name: "headerBar",
   data () {
@@ -27,7 +30,8 @@ export default {
     }
   },
   components: {
-    hover
+    hover,
+    login
   },
   methods: {
     toSeach () {

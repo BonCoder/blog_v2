@@ -1,4 +1,5 @@
 <template>
+  <!-- 文章单个组件 -->
   <div class="homeArticle">
     <div class="imgs">
       <img src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2378606792,1096904360&fm=27&gp=0.jpg"
@@ -11,7 +12,9 @@
       vConsole 让你在手机上也能轻63464松调试网页vConsole 让你在sasadasd
     </div>
     <div class="homeArticle-bottom">
-      <span>2018-05-15</span> <span>684</span> <span>5545</span>
+      <span><i class="icon-shijian"></i> 2018-05-15</span>
+      <span><i class="icon-nice-line"></i>684</span>
+      <span><i class="icon-yuedu"></i>5545</span>
     </div>
   </div>
 </template>
@@ -106,6 +109,12 @@ export default {
     font-size: 0.8rem;
     text-decoration: none;
     color: #999;
+    span {
+      margin: 0 4px;
+      i {
+        margin: 0 4px;
+      }
+    }
   }
 }
 </style>

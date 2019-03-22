@@ -14,13 +14,16 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-import App from './App.vue';
-import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css';
+import App from './App.vue'
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
 import store from './store'
-Vue.use(ElementUI);
+import router from './router'
+import $http from './requests'
 
-import router from './router/index.js';
+Vue.prototype.$http = $http
+
+Vue.use(ElementUI);
 
 const app = new Vue({
   el: '#app',

@@ -1,4 +1,5 @@
 <template>
+  <!-- 鼠标hover组件 -->
   <div class="hover">
     <div class="contain"
          :class="isActive?'isClick':''">{{contant}}</div>
