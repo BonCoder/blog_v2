@@ -5,8 +5,24 @@ Vue.use(VueRouter);
 export default new VueRouter({
   saveScrollPosition: true,
   routes: [{
-    name: 'header',
-    path: '/header',
-    component: resolve => void(require(['../components/headerBar.vue'], resolve))
-  }]
+      path: '/',
+      redirect: '/contant'
+    }, {
+      name: 'login',
+      path: '/login',
+      components: {
+        login: resolve => void(require(['../components/login.vue'], resolve))
+      }
+    },
+    {
+      name: 'contant',
+      path: '/contant',
+      component: resolve => void(require(['../components/contant.vue'], resolve))
+    },
+    {
+      name: 'detail',
+      path: '/detail',
+      component: resolve => void(require(['../components/detail.vue'], resolve))
+    }
+  ]
 });

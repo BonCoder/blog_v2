@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const $http = axios.create({
-  baseURL: 'http://localhost:4444'
+  baseURL: 'http://www.blog.com'
 })
 
 $http.interceptors.request.use(config => {

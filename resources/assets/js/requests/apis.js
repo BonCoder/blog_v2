@@ -1,3 +1,4 @@
-export const SWIPER = '/api/v1/swiper'
+//登录
 export const LOGIN = '/api/v1/login'
-export const CATELIST = '/api/v1/catelist'
+//注册
+export const REGUSTER = '/api/v1/register'

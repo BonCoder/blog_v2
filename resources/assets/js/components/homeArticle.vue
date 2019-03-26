@@ -8,7 +8,8 @@
         vConsole 让你在手机上也能轻63464松调试网页vConsole 让你在sasadasd
       </div>
     </div>
-    <div class="homeArticle-detatil">
+    <div class="homeArticle-detatil"
+         @click.stop="toDetail(100)">
       vConsole 让你在手机上也能轻63464松调试网页vConsole 让你在sasadasd
     </div>
     <div class="homeArticle-bottom">
@@ -21,7 +22,13 @@
 
 <script>
 export default {
-  name: "homeArticle"
+  name: "homeArticle",
+  methods: {
+    //去详情
+    toDetail (id) {
+      this.$router.push({ path: '/detail', query: { id } });
+    }
+  }
 }
 </script>
 

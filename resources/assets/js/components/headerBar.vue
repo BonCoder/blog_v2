@@ -11,10 +11,17 @@
              @click="toSeach"
              class="el-input__icon el-icon-search"></i>
         </el-input>
-        <el-button type="danger">登录</el-button>
-        <el-button type="danger">注册</el-button>
-        <login />
+        <el-button type="success"
+                   @click.stop="toLogin(true,0)"
+                   plain>登录</el-button>
+        <el-button type="danger"
+                   @click.stop="toLogin(true,1)"
+                   plain>注册</el-button>
       </div>
+      <!-- <router-view name="login"></router-view> -->
+      <login v-if="islogin"
+             @toLogin="toLogin"
+             :istype="istype" />
     </div>
   </div>
 </template>
@@ -26,7 +33,9 @@ export default {
   name: "headerBar",
   data () {
     return {
-      seach: ""
+      seach: "",
+      islogin: false,
+      istype: ""
     }
   },
   components: {
@@ -34,8 +43,14 @@ export default {
     login
   },
   methods: {
+    //去搜索
     toSeach () {
       console.log(0)
+    },
+    //去登录
+    toLogin (b, c) {
+      this.islogin = b
+      this.istype = c
     }
   }
 }

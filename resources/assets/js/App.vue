@@ -15,7 +15,7 @@
         </div> -->
         <!-- 文章 -->
         <div class="main-contant-contant">
-          <contant />
+          <router-view></router-view>
         </div>
         <!-- 个人信息 -->
         <div class="main-contant-personal">
@@ -25,11 +25,9 @@
     </div>
   </div>
 </template>
-
 <script>
 import headerBar from './components/headerBar'
 import navBar from './components/navBar'
-import contant from './components/contant'
 import personal from './components/personal'
 import './font/iconfont.css'
 export default {
@@ -41,21 +39,21 @@ export default {
   components: {
     headerBar,
     navBar,
-    personal,
-    contant
+    personal
   },
   mounted () {
-    console.log(this)
-  }
+
+  },
+
 }
 </script>
 
 <style lang="scss">
 html,
 body {
-  font-family: "PingFang SC";
-  // width: 100%;
-  // height: 100%;
+  //font-family: "PingFang SC";
+  width: 100%;
+  height: 100%;
 }
 body,
 div,
