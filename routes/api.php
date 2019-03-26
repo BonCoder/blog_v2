@@ -45,6 +45,8 @@ $api->version('v1', [
     $api->get('tag','IndexController@tag');
     //获取所有友链
     $api->get('links','IndexController@links');
+    //获取菜单
+    $api->get('category','CategoryController@index');
 
     $api->group(['prefix' => 'article'],function ($api){
         //文章列表
