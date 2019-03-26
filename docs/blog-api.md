@@ -16,6 +16,7 @@
 | name    | string    |  用户名  |
 | email    | string  |  邮箱  |
 | password | string | 密码 |
+| code | string | 验证码 |
 
 #### 返回体
 
