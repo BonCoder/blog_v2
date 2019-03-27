@@ -11,6 +11,8 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRegisterRequest;
 use App\Models\Member;
+use App\Models\VerificationCode;
+use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -38,8 +40,17 @@ class AuthController extends Controller
      */
     public function register(UserRegisterRequest $request)
     {
+        $payload = $request->only('name', 'email', 'password', 'code');
 
-        $payload = $request->only('name', 'email', 'password');
+        $verify = VerificationCode::where('account', $payload['email'])
+            ->byValid(300)
+            ->orderBy('id', 'desc')
+            ->first();
+
+        if (!$verify || $payload['code'] != $verify->code) {
+            return response()->json(['error' => '验证码不正确'])->setStatusCode(422);
+        }
+
         // 创建用户
         $result = Member::create([
             'name' => $payload['name'],

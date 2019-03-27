@@ -16,6 +16,7 @@
 | name    | string    |  用户名  |
 | email    | string  |  邮箱  |
 | password | string | 密码 |
+| code | string | 验证码 |
 
 #### 返回体
 
@@ -664,3 +665,63 @@
 | phone    | string      | yes       |  手机号  |
 
 ------------
+
+## 获取菜单
+
+### 请求地址
+
+ &hearts; `get` : `api/v1/category` 
+
+### 请求参数
+
+| 名称 | 类型 | 描述 |
+|:----:|:----:|------|
+| parent_id    | int    | 菜单ID(不传默认查一级菜单)  |
+   
+### 返回体
+
+```json5
+[
+    {
+        "id": 13,
+        "name": "服务器",
+        "parent_id": 0,
+        "sort": 0,
+        "created_at": "2019-03-26 19:29:08",
+        "updated_at": "2019-03-26 19:29:08"
+    },
+    {
+        "id": 12,
+        "name": "后端编程",
+        "parent_id": 0,
+        "sort": 0,
+        "created_at": "2019-03-26 19:29:08",
+        "updated_at": "2019-03-26 19:29:08"
+    },
+    {
+        "id": 11,
+        "name": "前端技术",
+        "parent_id": 0,
+        "sort": 0,
+        "created_at": "2019-03-26 19:27:56",
+        "updated_at": "2019-03-26 19:27:56"
+    },
+    {
+        "id": 9,
+        "name": "其他技术",
+        "parent_id": 0,
+        "sort": 0,
+        "created_at": "2018-12-18 16:18:19",
+        "updated_at": "2018-12-18 16:18:19"
+    }
+]
+```
+### 返回字段
+
+| name     | type     | must     | description |
+|----------|:--------:|:--------:|:--------:|
+| name    | string      | yes       |  名称  |
+| parent_id    | string      | yes       |  父级ID  |
+
+------------
+

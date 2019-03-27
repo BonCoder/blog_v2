@@ -31,8 +31,12 @@ class VerifyCodeController extends Controller
      */
     protected function sendFromRequest(Request $request)
     {
-        if(! $request->input('email')){
+        $email = $request->input('email');
+        if(! $email){
             return response()->json(['code' => 0, 'message' => '邮箱不能为空'], 402);
+        }
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            return response()->json(['code' => 0, 'message' => '非法邮箱格式'], 402);
         }
         $map = [
             'mail' => 'email',
