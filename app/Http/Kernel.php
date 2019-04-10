@@ -63,5 +63,6 @@ class Kernel extends HttpKernel
         'member' => \App\Http\Middleware\Member::class,
         'jwt.refresh' =>  \Tymon\JWTAuth\Http\Middleware\RefreshToken::class,
         'entrance' => \App\Http\Middleware\Entrance::class,
+        'cross' => \App\Http\Middleware\CrossHttp::class,
     ];
 }
