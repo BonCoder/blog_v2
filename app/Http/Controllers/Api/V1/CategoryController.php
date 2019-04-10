@@ -24,11 +24,14 @@ class CategoryController extends Controller
      */
     public function index(Request $request, Category $category)
     {
-        $parent_id = $request->get('parent_id',0);
-        $categories = $category->where('parent_id', $parent_id)
-                ->orderBy('id','desc')
-                ->orderBy('sort','desc')
-                ->get();
+        $parent_id = $request->get('parent_id', 0);
+        $categories = $category
+            ->when($parent_id, function ($query) use ($parent_id) {
+                $query->where('parent_id', $parent_id);
+            })
+            ->orderBy('id', 'desc')
+            ->orderBy('sort', 'desc')
+            ->get();
 
         return response()->json($categories)->setStatusCode(200);
     }

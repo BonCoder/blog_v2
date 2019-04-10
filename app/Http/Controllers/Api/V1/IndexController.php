@@ -20,7 +20,7 @@ class IndexController extends Controller
 {
 
     /**
-     *
+     *首页文章列表
      * @param Request $request
      * @param Article $article
      * @return \Illuminate\Http\JsonResponse
@@ -58,6 +58,7 @@ class IndexController extends Controller
 
 
     /**
+     * 广告banner
      * @param Request $request
      * @param Advert $advert
      * @return \Illuminate\Http\JsonResponse
@@ -73,6 +74,7 @@ class IndexController extends Controller
     }
 
     /**
+     * 标签
      * @param Tag $tag
      * @return \Illuminate\Http\JsonResponse
      * @author  Bob<bob@bobcoder.cc>
@@ -85,6 +87,7 @@ class IndexController extends Controller
     }
 
     /**
+     * 友情链接
      * @param Links $links
      * @return \Illuminate\Http\JsonResponse
      * @author   Bob<bob@bobcoder.cc>
@@ -97,6 +100,7 @@ class IndexController extends Controller
     }
 
     /**
+     * 站点基本信息
      * @return \Illuminate\Http\JsonResponse
      * @author   Bob<bob@bobcoder.cc>
      */
