@@ -10,7 +10,7 @@ Route::group([],function (RouteRegisterContract $web){
 
     $web->get('/','Home\IndexController@index')->name('home');
 
-    $web->get('/article','Home\IndexController@article');
+    $web->get('/article/{id}','Home\IndexController@article');
 
 });
 

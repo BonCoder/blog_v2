@@ -14,9 +14,9 @@ class IndexController extends Controller
         return view('home.index',['keywords' => $this->keywords]);
     }
 
-    public function article()
+    public function article($id)
     {
-        $article = Article::query()->orderBy('created_at','desc')->first();
+        $article = Article::query()->findOrFail($id);
 
         return view('home.article.index',compact('article'));
     }
