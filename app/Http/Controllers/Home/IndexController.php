@@ -11,7 +11,7 @@ class IndexController extends Controller
     public function index()
     {
 
-        return view('home.index',['keywords' => $this->keywords]);
+        return view('index',['keywords' => $this->keywords]);
     }
 
     public function article($id)

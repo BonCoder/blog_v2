@@ -25,7 +25,7 @@ $api->version('v1', [
 
     //验证token
     $api->group(['middleware' => 'refresh'], function ($api) {
-        $api->post('me', 'AuthController@me');
+        $api->post('user', 'AuthController@me');
         $api->post('refresh', 'AuthController@refresh');
     });
 
@@ -51,6 +51,8 @@ $api->version('v1', [
     $api->group(['prefix' => 'article'], function ($api) {
         //文章列表
         $api->get('/', 'IndexController@index');
+        //推荐文章列表
+        $api->get('/recommend', 'IndexController@recommend');
         //获取文章详情
         $api->get('/{article}', 'ArticleController@detail');
         //获取文章评论列表

@@ -1,137 +1,123 @@
+<style lang="scss" scoped>
+  #chang-jian-ye-mian-bu-ju + .demo-container .el-footer, #chang-jian-ye-mian-bu-ju + .demo-container .el-header {
+    text-align: center;
+  }
+  #chang-jian-ye-mian-bu-ju + .demo-container .el-main {
+    background-color: #ffffff;
+    color: #333;
+    text-align: center;
+    line-height: 160px;
+  }
+  .app{
+  }
+  .lv-container{
+    padding: 0 10px 0 10px;
+  }
+  .breadcrumb{
+    background-color: #ffffff;
+    padding-top: 20px;
+  }
+  .lv-breadcrumb-a{
+    font-weight: 400!important;
+  }
+  .header-bread{
+    position:fixed;
+    left:5px;
+    top:60px;
+    width: 100%;
+    z-index:100;
+  }
+  .header-bread-fillbg{
+    display: block!important;
+    background-color: white;
+  }
+  .content{
+    height: 35px;
+    padding: 6px 0 6px 0;
+    background-color: white;
+  }
+  @media only screen and (max-width: 683px){
+    .breadcrumb{
+      left: 0;
+      padding-top:0;
+    }
+    .content{
+      margin-right: 20px;
+      border-bottom: 1px #dcdfe6 solid;
+    }
+  }
+</style>
 <template>
-  <div id="app">
-    <!-- 公共头部组件 -->
-
-    <headerBar />
-    <!-- 主页大图 -->
-    <div class="banner"></div>
-    <navBar />
-    <!-- 主要部分 -->
-    <div class="main">
-      <div class="main-contant">
-        <!-- 广告位置 -->
-        <!-- <div class="main-contant-guanggao">
-          <guanggao />
-        </div> -->
-        <!-- 文章 -->
-        <div class="main-contant-contant">
-          <router-view></router-view>
-        </div>
-        <!-- 个人信息 -->
-        <div class="main-contant-personal">
-          <personal />
+  <div id="app" class="app">
+    <Navigation></Navigation>
+    <div class="lv-container page-component__scroll el-scrollbar wrapper" ref="wrapper">
+      <Notification></Notification>
+      <div class="header-bread">
+        <div class="header-bread-fillbg">
+          <el-row type="flex" class="breadcrumb" justify="center">
+            <el-col :lg="16" :md="16" :sm="24" :xs="24" class="content" :style="edit.styles.bread">
+              <el-breadcrumb separator="/" class="breadcrumb-inner">
+                <el-breadcrumb-item v-for="(item,index) in $route.matched" :key="index">
+                  <router-link class="lv-breadcrumb-a" :to="{ name:item.name }">{{ item.name }}</router-link>
+                </el-breadcrumb-item>
+              </el-breadcrumb>
+            </el-col>
+          </el-row>
         </div>
       </div>
+      <router-view></router-view>
     </div>
+    <Register></Register>
+    <Login></Login>
   </div>
 </template>
+
 <script>
-import headerBar from './components/headerBar'
-import navBar from './components/navBar'
-import personal from './components/personal'
-import './font/iconfont.css'
-export default {
-  data () {
-    return {
-      msg: 's'
+  import Navigation from './components/global/NavigationModal';
+  import Register from './components/global/RegisterModal';
+  import Login from './components/global/LoginModal';
+  import Notification from './components/global/Notification';
+  export default {
+    data() {
+      return {
+        loader:'',
+        minHeight: 0,
+      };
+    },
+    created(){
+      if(this.$route.query.article){
+        var type = this.$route.query.type;
+        var location = this.$route.query.location;
+        switch (type) {
+          case 'comment': this.$router.push({path:'/art/'+this.$route.query.article,query:{anchor:'comment' + location}});
+            break;
+          case 'reply': this.$router.push({path:'/art/'+this.$route.query.article,query:{anchor:'rely' + location}});
+            break;
+        }
+      }
+      var target = this.$route.query.target;
+      if(target){
+        switch(target){
+          case 'blog' : this.$router.push({name:'用户文章',params:{user:this.$route.query.user},query:{user:this.$route.query.user}});
+            break;
+        }
+      }
+    },
+    methods: {
+      handleSelect(key, keyPath) {
+        //console.log(key, keyPath);
+      }
+    },
+    components: {
+      Navigation,
+      Register,
+      Login,
+      Notification,
+    },
+    computed:{
+      edit(){
+        return this.$store.getters.getScreenEditor;
+      }
     }
-  },
-  components: {
-    headerBar,
-    navBar,
-    personal
-  },
-  mounted () {
-
-  },
-
-}
+  }
 </script>
-
-<style lang="scss">
-html,
-body {
-  //font-family: "PingFang SC";
-  width: 100%;
-  height: 100%;
-}
-body,
-div,
-dl,
-dt,
-dd,
-ul,
-ol,
-li,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-pre,
-code,
-form,
-fieldset,
-legend,
-input,
-texarea,
-p,
-blockquote,
-th,
-td {
-  margin: 0px;
-  padding: 0px;
-}
-a {
-  text-decoration: none;
-}
-#app {
-  width: 100%;
-  height: 100%;
-  .banner {
-    width: 100%;
-    height: 395px;
-    background: url("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1553739689&di=7e1ce9a30665bb9d4de7c4a268460b2d&imgtype=jpg&er=1&src=http%3A%2F%2Fattimg.dospy.com%2Fimg%2Fday_100221%2F20100221_3895f3db24c21f064c35Q7StqsweChDs.jpg")
-      no-repeat center;
-    background-size: cover;
-  }
-  .main {
-    min-height: 200px;
-    background: #f5f8fa;
-    &-contant {
-      width: 60%;
-      margin: 0 auto;
-      min-height: 600px;
-      display: flex;
-      &-contant {
-        flex: 3;
-      }
-      &-personal {
-        flex: 1;
-      }
-    }
-  }
-}
-/* width */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  background: rgb(255, 255, 255);
-  border-radius: 8px;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #09f;
-  border-radius: 8px;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #06f;
-}
-</style>

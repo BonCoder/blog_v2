@@ -17,11 +17,14 @@ window.Vue = require('vue');
 import App from './App.vue'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-import store from './store'
+import store from './store.js'
 import router from './router'
-import $http from './requests'
+import hljs from 'highlight.js'
 
-Vue.prototype.$http = $http
+
+// import $http from './requests'
+//
+// Vue.prototype.$http = $http
 
 Vue.use(ElementUI);
 

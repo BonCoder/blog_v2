@@ -1,0 +1,177 @@
+<template>
+    <div class="art el-scrollbar__wrap" :style="styles.art_style">
+        <el-backtop target=".page-component__scroll .el-scrollbar__wrap"></el-backtop>
+        <el-row class="main" type="flex" justify="center">
+            <el-col :xs="24" :sm="24" :md="16" :lg="16">
+                <div id="artcle-info" :style="{'background-image': 'url('+article.thumb+')'}" @load="handleLoad" v-loading="bg_loading">
+                    <h2 class="text-center art-title">{{article.title}}</h2>
+                    <!-- 描述：文章信息 -->
+                    <div class="text-center timeAndView">
+<!--                        <router-link :to="{ name:'主页' ,params:{'user':article.user.id}}"><el-avatar :size="35" :src="article.user.avatar"></el-avatar></router-link>-->
+                        ·
+                        <span class="article-time">
+							<i class="el-icon-time"></i>
+							<span>{{article.created_at}}</span>
+						</span>
+                        ·
+                        <span class="article-views">
+							<i class="el-icon-view"></i>
+							<span>{{article.click}}</span>次阅读
+						</span>
+                    </div>
+                    <p class="abstract">
+                        {{article.excerpt}}
+                    </p>
+                </div>
+                <hr />
+                <mavon-editor
+                        class="markdown-body"
+                        :value="article.body"
+                        :subfield = "false"
+                        :defaultOpen = "'preview'"
+                        :toolbarsFlag = "false"
+                        :editable="false"
+                        :scrollStyle="true"
+                        :ishljs = "true"
+                ></mavon-editor>
+                <!--<div id="artcle-content"  class="content markdown-body" v-highlight v-html="article.body">-->
+
+                <div id="statement">
+                    <div class="lv-article">
+                        <router-link :to="{ name:'主页' ,params:{'user':article.user_id},query:{user:article.user_id}}">
+                        作者：{{article.user.username}}
+                        </router-link>
+                    </div>
+                    <div class="lv-article">本文链接：
+                        <a href="#">{{ url }}</a>
+                    </div>
+                    <div class="lv-article">版权声明：本博客所有文章除特别声明外,转载请注明出处!</div>
+                </div>
+                <el-divider style="margin: 24px 0"></el-divider>
+                <div class="comment">
+                    <comment></comment>
+                </div>
+            </el-col>
+        </el-row>
+        <whell-menu></whell-menu>
+    </div>
+</template>
+<script>
+    import {mavonEditor} from 'mavon-editor';
+    import 'mavon-editor/dist/css/index.css';
+    import 'mavon-editor/dist/css/index.css';
+    import 'highlight.js/styles/monokai-sublime.css';
+    import comment from '../components/Art/comment'
+    import WhellMenu from '../components/Wheel-menu'
+    import { Bob_CONFIG } from '../config';
+    // import 'github-markdown-css';
+    export default {
+        name: 'art',
+        data () {
+            return {
+                styles:{
+                    art_style:{
+                        height:''
+                    }
+                },
+                url:'',
+                art_height:'',
+                bg_loading:true,
+                imgUrl: this.$store.getters.getConfigs.IMG_API + this.$route.params.art_id,
+            }
+        },
+        components:{
+            mavonEditor,
+            comment,
+            WhellMenu
+        },
+        created() {
+            this.$store.dispatch('loadArticle',{
+                art_id : this.$route.params.art_id
+            });
+            this.url = Bob_CONFIG.URL+this.$route.path;
+            //已废弃
+            // let viewWidth = window.innerWidth;
+            // this.url= window.location.href;
+            // this.styles.art_style.height = window.innerHeight-132+'px';
+        },
+        mounted(){
+            this.art_height = window.innerHeight-130+'px';
+            let bgImg = new Image();
+            bgImg.src = this.$store.getters.getConfigs.IMG_API+ this.$route.params.art_id; // 获取背景图片的url
+            bgImg.onerror = () => {
+                console.log('img onerror')
+            };
+            bgImg.onload = () => { // 等背景图片加载成功后 去除loading
+                this.bg_loading = false
+            };
+            // $('html')[0].scrollTop = 0;
+        },
+        computed:{
+            article(){
+                return this.$store.getters.getArticle;
+            }
+        },
+        methods:{
+            handleLoad(e){
+                //console.log(e)
+            },
+        },
+    }
+</script>
+<style lang="scss" scoped>
+    #artcle-info {
+        padding: 20px;
+        //background-image: url(https://s0.xinger.ink/acgimg/acgurl.php?678);
+        margin-bottom: 40px;
+        background-size: cover;
+        color: #ffffff;
+    }
+
+    #artcle-info .abstract {
+        color: #ffffff;
+        border-left: 3px solid #F56C6C;
+        padding: 10px;
+        background-color: rgba(126, 129, 135, 0.3);
+    }
+
+    #artcle-info .timeAndView {
+        padding: 20px 20px 20px 0;
+        line-height: 30px;
+        font-size: 16px;
+        color: #ffffff;
+    }
+    #artcle-info .text-center{
+        display: flex;
+        justify-content: center;
+        align-articles: center;
+    }
+    pre.has {
+        color: #ffffff;
+        background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    img.has {
+        width: 100%;
+    }
+
+    #statement {
+        font-size: 14px;
+        margin-top: 20px;
+        border-left: 3px solid #F56C6C;
+        padding: 5px;
+        background-color: #EBEEF5;
+    }
+    .lv-article{
+        margin-top: 6px;
+    }
+    .main{
+        height: inherit;
+    }
+
+    @media only screen and (max-width: 683px){
+        .abstract{
+            display: none;
+        }
+    }
+</style>

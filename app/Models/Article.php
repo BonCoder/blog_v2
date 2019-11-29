@@ -14,11 +14,11 @@ class Article extends Model
 
     protected $primaryKey = 'id';
 
-    protected $fillable = ['category_id','title','keywords','content','thumb','click','recommend','user_id'];
+    protected $fillable = ['category_id', 'title', 'keywords', 'content', 'thumb', 'click', 'recommend', 'user_id'];
 
     protected $hidden = ['commentable_type', 'commentable_id'];
 
-    protected $with = ['category', 'tags'];
+//    protected $with = ['category', 'tags'];
 
     /**
      *  文章所属分类
@@ -33,7 +33,7 @@ class Article extends Model
      */
     public function tags()
     {
-        return $this->belongsToMany('App\Models\Tag','article_tag','article_id','tag_id');
+        return $this->belongsToMany('App\Models\Tag', 'article_tag', 'article_id', 'tag_id');
     }
 
     /**
@@ -47,8 +47,19 @@ class Article extends Model
     /**
      *  文章转载地址
      */
-    public function source():HasOne
+    public function source(): HasOne
     {
-        return $this->hasOne(Source::class,'article_id','id');
+        return $this->hasOne(Source::class, 'article_id', 'id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @author   Bob<bob@bobcoder.cc>
+     * @link https://www.bobcoder.cc/
+     * @Date  2019/11/29
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class)->select('id', 'username', 'avatar', 'introduction');
     }
 }

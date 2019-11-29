@@ -15,7 +15,7 @@ class ArticleController extends Controller
 {
     public function detail(Request $request, Article $article)
     {
-        $article->load('source');
+        $article->load(['source', 'user', 'category', 'tags']);
 
         $article->increment('click', rand(2,5));
 
