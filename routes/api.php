@@ -42,11 +42,11 @@ $api->version('v1', [
     //获取广告位
     $api->get('adverts', 'IndexController@adverts');
     //获取所有标签
-    $api->get('tag', 'IndexController@tag');
+    $api->get('tags', 'IndexController@tag');
     //获取所有友链
     $api->get('links', 'IndexController@links');
     //获取菜单
-    $api->get('category', 'CategoryController@index');
+    $api->get('categories', 'CategoryController@index');
 
     $api->group(['prefix' => 'article'], function ($api) {
         //文章列表

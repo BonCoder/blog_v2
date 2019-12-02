@@ -20,7 +20,7 @@
     @yield('content')
 </div>
 
-<script src="/js/jquery.min.js"></script>
+<script src="/static/admin/js/jquery.min.js"></script>
 <script src="/static/admin/layuiadmin/layui/layui.all.js"></script>
 <script>
     $.ajaxSetup({

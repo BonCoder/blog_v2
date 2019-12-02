@@ -91,6 +91,8 @@ class ArticleController extends Controller
         if($link = $request->get('link')){
             $article->source()->create(['link' => $link]);
         }
+        //文章关联分类的总数加一
+        $article->category()->increment('count', 1);
 
         return redirect(route('admin.article'))->with(['status'=>'添加成功']);
     }
@@ -173,6 +175,8 @@ class ArticleController extends Controller
             $model->tags()->sync([]);
             //删除文章
             $model->delete();
+            //文章关联分类的总数减一
+            $model->category()->decrement('count', 1);
         }
         return response()->json(['code'=>0,'msg'=>'删除成功']);
     }

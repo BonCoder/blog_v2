@@ -551,7 +551,7 @@
 
 ### 请求地址
 
- &hearts; `get` : `api/v1/tag`
+ &hearts; `get` : `api/v1/tags`
 
 ### 请求参数
 无
@@ -670,7 +670,7 @@
 
 ### 请求地址
 
- &hearts; `get` : `api/v1/category` 
+ &hearts; `get` : `api/v1/categories` 
 
 ### 请求参数
 
